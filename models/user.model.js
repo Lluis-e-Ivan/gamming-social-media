@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt');
 
 const userSchema = new Schema(
     {
@@ -15,14 +16,18 @@ const userSchema = new Schema(
             minLength: [2, 'Username needs at least 2 chars'],
             unique: true
         },
+        email: {
+            type: String,
+            required: [true, 'Email is required'],
+        },
         password: {
             type: String,
             required: [true, 'Password is required'],
             minLength: [1, 'Password needs at least 1 char']
         },
-        email: {
+        image: {
             type: String,
-            required: [true, 'Email is required'],
+            default: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
         },
         phone: {
             type: Number
@@ -34,6 +39,24 @@ const userSchema = new Schema(
     },
     { timestamps: true }
 );
+
+userSchema.pre('save', function(next) {
+    if(this.isModified('password')) {
+        bcrypt
+            .hash(this.password, 10)
+            .then((hash) => {
+                this.password = hash;
+                next();
+            })
+            .catch(next);
+    } else {
+        next();
+    }
+});
+
+userSchema.methods.checkPassword = function(passwordToCheck) {
+    return bcrypt.compare(passwordToCheck, this.password);
+};
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;

@@ -12,9 +12,17 @@
             </li>
         </ul>
     </div>
+    {{#if currentUser}}
+    <div>
+      <form action="/logout" method="POST">
+        <button class="btn btn-link mx-1 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Logout</button>
+      </form>
+    </div>
+    {{else}}
     <div>
         <a href="/login" type="button" class="btn btn-link mx-1 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Log in</a>   
         <a href="/signup" type="button" class="btn btn-success">Sign up</a>
     </div>
+    {{/if}}
   </div>
 </nav>

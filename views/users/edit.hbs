@@ -1,10 +1,6 @@
 {{>navbar}}
 
-<div class="container my-3">
-    <h1>Sign up</h1>
-</div>
-
-<form class="container" action="/signup" method="POST">
+<form class="container" action="/edit/{{currentUser.id}}" method="POST">
     <div class="row g-3">
         <div class="col form-floating mb-3">
             <input type="text" name="name" class="form-control" value="{{user.name}}" id="floatingInput" placeholder="Name" >
@@ -16,32 +12,28 @@
         </div>
     </div>
     <div class="form-floating mb-3">
-        <input type="date" class="form-control" value="{{user.birthDate}}" name="birthDate">
+        <input type="date" class="form-control" value="{{currentUser.birthDate}}" name="birthDate">
         <label for="floatingInput">Birth date</label>
     </div>
     <div class="form-floating mb-3">
-        <input type="number" name="phone" class="form-control" value="{{user.phone}}" id="floatingInput" placeholder="123456789">
+        <input type="number" name="phone" class="form-control" value="{{currentUser.phone}}" id="floatingInput" placeholder="123456789">
         <label for="floatingInput">Phone number</label>
     </div>
     <div class="form-floating mb-3">
-        <input type="text" name="username" value="{{user.username}}" class="form-control {{#if errors.username}} is-invalid {{/if}}" id="floatingInput" placeholder="Username">
+        <input type="text" name="username" value="{{currentUser.username}}" class="form-control {{#if errors.username}} is-invalid {{/if}}" id="floatingInput" placeholder="Username">
         <label for="floatingInput">Username</label>
         {{#if errors.username}}<div class="invalid-feedback">{{errors.username}}</div>{{/if}}
     </div>
     <div class="form-floating mb-3">
-        <input type="email" name="email" value="{{user.email}}" class="form-control {{#if errors.email}} is-invalid {{/if}}" id="floatingInput" placeholder="name@example.com">
+        <input type="email" name="email" value="{{currentUser.email}}" class="form-control {{#if errors.email}} is-invalid {{/if}}" id="floatingInput" placeholder="name@example.com">
         <label for="floatingInput">Email address</label>
         {{#if errors.email}}<div class="invalid-feedback">{{errors.email}}</div>{{/if}}
     </div>
+    
     <div class="form-floating mb-3">
-        <input type="password" name="password" class="form-control {{#if errors.password}} is-invalid {{/if}}" id="floatingPassword" placeholder="Password">
-        <label for="floatingPassword">Password</label>
-        {{#if errors.password}}<div class="invalid-feedback">{{errors.password}}</div>{{/if}}
-    </div>
-    <div class="form-floating mb-3">
-        <input type="text" name="image" value="{{user.image}}" class="form-control" id="floatingPassword" placeholder="Password">
+        <input type="text" name="image" value="{{currentUser.image}}" class="form-control" id="floatingPassword" placeholder="Password">
         <label for="floatingPassword">Image</label>
     </div>
     
-    <button type="submit" class="btn btn-primary">Create</button>
+    <button type="submit" class="btn btn-primary">Editar</button>
 </form>
