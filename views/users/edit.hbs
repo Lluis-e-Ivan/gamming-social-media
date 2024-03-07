@@ -1,39 +1,63 @@
 {{>navbar}}
+<div>
+    <form class="container my-3" action="/edit/{{currentUser.id}}" method="POST">
+        <div class="row g-3">
+            <div class="col form-floating mb-3">
+                <input type="text" name="name" class="form-control" value="{{user.name}}" id="floatingInput" placeholder="Name" >
+                <label for="floatingInput">Name</label>
+            </div>
+            <div class="col form-floating mb-3">
+                <input type="text" name="lastName" class="form-control" value="{{user.lastName}}" id="floatingInput" placeholder="Last Name">
+                <label for="floatingInput">Last name</label>
+            </div>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="date" class="form-control" value="{{currentUser.birthDate}}" name="birthDate">
+            <label for="floatingInput">Birth date</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="number" name="phone" class="form-control" value="{{currentUser.phone}}" id="floatingInput" placeholder="123456789">
+            <label for="floatingInput">Phone number</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" name="username" value="{{currentUser.username}}" class="form-control {{#if errors.username}} is-invalid {{/if}}" id="floatingInput" placeholder="Username">
+            <label for="floatingInput">Username</label>
+            {{#if errors.username}}<div class="invalid-feedback">{{errors.username}}</div>{{/if}}
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" name="email" value="{{currentUser.email}}" class="form-control {{#if errors.email}} is-invalid {{/if}}" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">Email address</label>
+            {{#if errors.email}}<div class="invalid-feedback">{{errors.email}}</div>{{/if}}
+        </div>
+        <div class="form-floating mb-3">
+            <input type="password" name="password" class="form-control {{#if errors.password}} is-invalid {{/if}}" id="floatingPassword" placeholder="Password">
+            <label for="floatingPassword">Password</label>
+            {{#if errors.password}}<div class="invalid-feedback">{{errors.password}}</div>{{/if}}
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" name="image" value="{{currentUser.image}}" class="form-control" id="floatingPassword" placeholder="Password">
+            <label for="floatingPassword">Image</label>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Done</button>
+    </form>
+</div>
 
-<form class="container" action="/edit/{{currentUser.id}}" method="POST">
-    <div class="row g-3">
-        <div class="col form-floating mb-3">
-            <input type="text" name="name" class="form-control" value="{{user.name}}" id="floatingInput" placeholder="Name" >
-            <label for="floatingInput">Name</label>
+<div class="container">
+    <p class="d-inline-flex gap-1">
+        <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseDelete" role="button" aria-expanded="false" aria-controls="collapseDelete">
+            Delete
+        </a>
+    </p>
+    <div class="collapse" id="collapseDelete">
+        <div class="card card-body">
+            Are you sure you want to delete your account and all your info permanently?
         </div>
-        <div class="col form-floating mb-3">
-            <input type="text" name="lastName" class="form-control" value="{{user.lastName}}" id="floatingInput" placeholder="Last Name">
-            <label for="floatingInput">Last name</label>
-        </div>
+        <form action="/delete/{{currentUser.id}}" method="POST">
+            <button type="submit" class="btn btn-outline-danger">YES</button> 
+        </form>
+        <a class="btn btn-outline-secondary" data-bs-toggle="collapse" href="#collapseDelete" role="button" aria-expanded="false" aria-controls="collapseDelete">
+        NO
+        </a>
     </div>
-    <div class="form-floating mb-3">
-        <input type="date" class="form-control" value="{{currentUser.birthDate}}" name="birthDate">
-        <label for="floatingInput">Birth date</label>
-    </div>
-    <div class="form-floating mb-3">
-        <input type="number" name="phone" class="form-control" value="{{currentUser.phone}}" id="floatingInput" placeholder="123456789">
-        <label for="floatingInput">Phone number</label>
-    </div>
-    <div class="form-floating mb-3">
-        <input type="text" name="username" value="{{currentUser.username}}" class="form-control {{#if errors.username}} is-invalid {{/if}}" id="floatingInput" placeholder="Username">
-        <label for="floatingInput">Username</label>
-        {{#if errors.username}}<div class="invalid-feedback">{{errors.username}}</div>{{/if}}
-    </div>
-    <div class="form-floating mb-3">
-        <input type="email" name="email" value="{{currentUser.email}}" class="form-control {{#if errors.email}} is-invalid {{/if}}" id="floatingInput" placeholder="name@example.com">
-        <label for="floatingInput">Email address</label>
-        {{#if errors.email}}<div class="invalid-feedback">{{errors.email}}</div>{{/if}}
-    </div>
-    
-    <div class="form-floating mb-3">
-        <input type="text" name="image" value="{{currentUser.image}}" class="form-control" id="floatingPassword" placeholder="Password">
-        <label for="floatingPassword">Image</label>
-    </div>
-    
-    <button type="submit" class="btn btn-primary">Editar</button>
-</form>
+</div>

@@ -1,10 +1,19 @@
 {{>navbar}}
 
-<div class="container my-3">
-    <h1>¿Que tal estás, {{currentUser.username}}?</h1>
+<div class="container d-flex">
+    <div class="container my-3">
+        <h1>{{currentUser.username}}</h1>
+        <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla, natus quod eaque non soluta modi voluptatem, dolorem quos molestias dolorum aut unde reprehenderit voluptate deleniti eum quidem cum odio fugiat?</p>
+        <a class="btn btn-primary" href="/edit/{{currentUser.id}}">Edit profile</a>
+    </div>
+    <div class="my-3">
+        <img src="{{currentUser.image}}" style="max-width: 200px" class="img-thumbnail">
+    </div>
 </div>
 
-<a class="btn btn-primary" href="/edit/{{currentUser.id}}">Edit profile</a>
+
+
+
 
 
 

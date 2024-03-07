@@ -2,6 +2,7 @@ const User = require('../models/user.model');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const { sessions } = require('../middlewares/auth.middleware');
+const createError = require('http-errors');
 
 module.exports.create = (req, res, next) => res.render('users/signup');
 
@@ -18,7 +19,7 @@ module.exports.doCreate = (req, res, next) => {
                     username: req.body.username, 
                     email: req.body.email, 
                     password: req.body.password,
-                    image: req.body.image,
+                    image: req.file ? `/uploads/${req.file.filename}` : '',
                     phone: req.body.phone,
                     birthDate: req.body.birthDate
                 };
@@ -70,18 +71,29 @@ module.exports.edit = (req, res, next) => res.render('users/edit');
 
 module.exports.doEdit = (req, res, next) => {
     const { id } = req.params;
-    const user = { 
+    const patch = { 
         name: req.body.name, 
         lastName: req.body.lastName, 
         username: req.body.username, 
         email: req.body.email, 
-        // password: req.body.password,
         image: req.body.image,
         phone: req.body.phone,
         birthDate: req.body.birthDate
     }
 
-    User.findByIdAndUpdate(id, user, { runValidators: true })
+    if (req.body.password) {
+        patch.password = req.body.password;
+    }
+
+    User.findById(id)
+        .then(user => {
+            if (!user) {
+                next(createError(404, 'User not found'));
+            } else {
+                Object.assign(user, patch)
+                return user.save()
+            }
+        })
         .then((user) => {
             res.redirect('/profile');
         })
@@ -94,4 +106,11 @@ module.exports.doEdit = (req, res, next) => {
         });
 };
 
+module.exports.doDelete = (req, res, next) => {
+    const { id } = req.params;
+
+    User.findByIdAndDelete(id)
+        .then(() => res.redirect('/login'))
+        .catch(next)
+}
 

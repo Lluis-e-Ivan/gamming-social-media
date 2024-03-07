@@ -4,7 +4,7 @@
     <h1>Sign up</h1>
 </div>
 
-<form class="container" action="/signup" method="POST">
+<form class="container" action="/signup" method="POST" enctype="multipart/form-data">
     <div class="row g-3">
         <div class="col form-floating mb-3">
             <input type="text" name="name" class="form-control" value="{{user.name}}" id="floatingInput" placeholder="Name" >
@@ -38,9 +38,9 @@
         <label for="floatingPassword">Password</label>
         {{#if errors.password}}<div class="invalid-feedback">{{errors.password}}</div>{{/if}}
     </div>
-    <div class="form-floating mb-3">
-        <input type="text" name="image" value="{{user.image}}" class="form-control" id="floatingPassword" placeholder="Password">
-        <label for="floatingPassword">Image</label>
+    <div class="mb-3">
+        <label for="formFile" style="color: white"  class="form-label">Profile's image</label>
+        <input name="image" value="{{user.image}}" class="form-control" type="file" id="formFile">
     </div>
     
     <button type="submit" class="btn btn-primary">Create</button>
