@@ -27,7 +27,8 @@ router.post('/edit/:id', secure.isAuthenticated, users.doEdit);
 router.post('/delete/:id', secure.isAuthenticated, users.doDelete);
 
 // Game Routes
+router.get('/games', games.list);
+router.get('/game/:id', games.details);
 
-router.get('/games-list', games.list);
 
 module.exports = router;

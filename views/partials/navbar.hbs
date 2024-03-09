@@ -11,15 +11,15 @@
               <a class="nav-link active" aria-current="page" href="/">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/games-list">Games</a>
+              <a class="nav-link active" aria-current="page" href="/games">Games</a>
             </li>
         </ul>
     </div>
     {{#if currentUser}}
     <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        {{currentUser.username}}
-      </button>
+      
+        <img class="rounded-circle border border-2 object-fit-cover" src="{{currentUser.image}}" type="button" alt="Logo" data-bs-toggle="dropdown" width="45" height="45"/>
+      
       <ul class="dropdown-menu dropdown-menu-dark">
         <li><a class="dropdown-item" href="/profile">See profile</a></li>
         <li>
