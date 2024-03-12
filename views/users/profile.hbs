@@ -1,15 +1,29 @@
 {{>navbar}}
 
-<div class="container d-flex">
-    <div class="container my-3">
-        <h1>{{currentUser.username}}</h1>
-        <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla, natus quod eaque non soluta modi voluptatem, dolorem quos molestias dolorum aut unde reprehenderit voluptate deleniti eum quidem cum odio fugiat?</p>
-        <a class="btn btn-primary" href="/edit/{{currentUser.id}}">Edit profile</a>
+<div class="container">
+    <div class="d-flex">
+        <div class="container my-3">
+            <h1>{{currentUser.username}}</h1>
+            <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla, natus quod eaque non soluta modi voluptatem, dolorem quos molestias dolorum aut unde reprehenderit voluptate deleniti eum quidem cum odio fugiat?</p>
+            <a class="btn btn-primary" href="/edit/{{currentUser.id}}">Edit profile</a>
+        </div>
+        <div class="my-3">
+                    <img class="rounded-circle border border-2 object-fit-cover" src="{{currentUser.image}}" type="button" alt="Logo" data-bs-toggle="dropdown" width="200" height="200"/>
+        </div>
     </div>
-    <div class="my-3">
-                <img class="rounded-circle border border-2 object-fit-cover" src="{{currentUser.image}}" type="button" alt="Logo" data-bs-toggle="dropdown" width="200" height="200"/>
+
+    <div>
+        {{#each user.yourGames as |yourGame|}}
+        <div class="d-flex">
+            <img style="max-width: 100px" src="{{yourGame.game.thumbnail}}"/>
+            <h1>{{yourGame.game.title}}</h1>
+        </div>
+        {{/each}}
     </div>
 </div>
+
+
+
 
 
 

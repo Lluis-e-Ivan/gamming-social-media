@@ -30,5 +30,7 @@ router.post('/delete/:id', secure.isAuthenticated, users.doDelete);
 router.get('/games', games.list);
 router.get('/game/:id', games.details);
 
+// Relations Routes
+router.post('/game/:id', users.addGame);
 
 module.exports = router;

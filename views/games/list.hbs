@@ -1,5 +1,14 @@
 {{>navbar}}
 
+<div class="input-group container my-3">
+    <input class="form-control bg-dark border-end-0 rounded-pill" style="border:0px solid rgba(0, 0, 0, 0); padding-left:30px" type="search" value="Search" id="example-search-input">
+    <span class="input-group-append">
+        <button class="btn btn-dark border-bottom-0 rounded-pill ms-n5" style="border:0px solid rgba(0, 0, 0, 0)" type="button">
+            <i class="fa fa-search"></i>
+        </button>
+    </span>
+</div>
+
 <div class="container my-3">
     <h1> Games: </h1>
     <div class="row justify-content-around">
@@ -11,7 +20,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{title}}</h5>
                         <p class="card-text">{{short_description}}</p>
-                        <a href="/game/{{id}}" class="btn btn-primary">Details</a>
+                        <a href="/game/{{_id}}" class="btn btn-primary">Details</a>
                     </div>
                 </div>
             </div>

@@ -1,8 +1,10 @@
 const User = require('../models/user.model');
+const Game = require('../models/game.model')
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const { sessions } = require('../middlewares/auth.middleware');
 const createError = require('http-errors');
+const UserGame = require('../models/user-game.model');
 
 module.exports.create = (req, res, next) => res.render('users/signup');
 
@@ -65,7 +67,22 @@ module.exports.logout = (req, res, next) => {
     res.redirect('/login');
 };
 
-module.exports.profile = (req, res, next) => res.render('users/profile');
+module.exports.profile = (req, res, next) => {
+    const { id } = req.params;
+
+    User.findById(req.user.id)
+        .populate({
+            path: 'yourGames', 
+            populate: {
+                path: 'game'
+            }
+        })
+        .then((user) => {
+            res.render('users/profile', { user })
+        })
+        .catch(next)
+}
+
 
 module.exports.edit = (req, res, next) => res.render('users/edit');
 
@@ -112,5 +129,15 @@ module.exports.doDelete = (req, res, next) => {
     User.findByIdAndDelete(id)
         .then(() => res.redirect('/login'))
         .catch(next)
-}
+};
 
+module.exports.addGame = (req, res, next) => {
+    const game = req.params.id;
+    const user = req.user.id;
+    
+    UserGame.create({ game, user })     
+        .then(() => res.redirect(`/game/${game}`))
+        .catch(next)
+};
+
+ 

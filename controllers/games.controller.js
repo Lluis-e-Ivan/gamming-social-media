@@ -18,7 +18,7 @@ module.exports.list = (req, res, next) => {
 module.exports.details = (req, res, next) => {
     const { id } = req.params;
 
-    Game.findOne({ id })
+    Game.findById( id )
         .then((game) => {
             if(!game) {
                 next(createError(404, 'Game not found'));
