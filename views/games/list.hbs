@@ -9,22 +9,36 @@
     </span>
 </div>
 
-<div class="container my-3">
-    <h1> Games: </h1>
-    <div class="row justify-content-around">
-        {{#each games}}
-        <div class="col-3">
-            <div class="my-3">
-                <div class="card text-bg-dark mb-3" style="width: 18rem;">
-                    <img src="{{thumbnail}}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">{{title}}</h5>
-                        <p class="card-text">{{short_description}}</p>
-                        <a href="/game/{{_id}}" class="btn btn-primary">Details</a>
+<div class="container">
+    <div class="card-header">
+        <ul class="nav nav-underline">
+            <li class="nav-item">
+                <a class="nav-link active" style="color:white" href="#">All games</a>
+            </li>
+            <li class="nav-item-secondary">
+                <a class="nav-link" href="#">Your games</a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <div class="container my-3">
+            <h1> Games: </h1>
+            <div class="row justify-content-around">
+                {{#each games}}
+                <div class="col-3">
+                    <div class="my-3">
+                        <div class="card text-bg-dark mb-3" style="width: 18rem;">
+                            <img src="{{thumbnail}}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{title}}</h5>
+                                <p class="card-text">{{short_description}}</p>
+                                <a href="/game/{{_id}}" class="btn btn-primary">Details</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                {{/each}}
             </div>
         </div>
-        {{/each}}
     </div>
 </div>

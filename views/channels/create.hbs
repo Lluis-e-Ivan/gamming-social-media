@@ -1,0 +1,33 @@
+{{>navbar}}
+
+<div class="container my-3">
+    <h1>Channel create</h1>
+</div>
+
+<form class="container" action="/game/{{game._id}}/create-channel" method="POST" enctype="multipart/form-data">
+
+    <div class="col form-floating mb-3">
+        <input type="text" name="name" class="form-control {{#if errors.name}} is-invalid {{/if}}" id="floatingInput" placeholder="Channel name" >
+        <label for="floatingInput">Channel name</label>
+        {{#if errors.name}}<div class="invalid-feedback">{{errors.name}}</div>{{/if}}
+    </div>
+
+    <div class="col form-floating mb-3">
+        <input type="text" name="description" class="form-control" value="{{channel.description}}" id="floatingInput" placeholder="Description" >
+        <label for="floatingInput">Description</label>
+    </div>
+
+    <div class="mb-3">
+        <label for="formFile" style="color: white"  class="form-label">Profile's image</label>
+        <input name="image" class="form-control" type="file" id="formFile">
+    </div>
+
+    <div class="form-check">
+        <input class="form-check-input" name="private" type="checkbox" id="flexCheckDefault">
+        <label class="form-check-label" for="flexCheckDefault">
+            Private channel
+        </label>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Create channel</button>
+</form>

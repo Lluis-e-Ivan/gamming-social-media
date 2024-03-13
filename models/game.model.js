@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const Channel = require('./channel.model');
 
 const gameSchema = new Schema(
     {
@@ -47,10 +48,20 @@ const gameSchema = new Schema(
         },
         screenshots: {
             type: [Object]
+        },
+        channels: {
+            type: mongoose.Types.ObjectId,
+            ref: 'Channel'
         }
     },
     { timestamps: true }
 );
+
+gameSchema.virtual('yourChannels', {
+    ref: 'Channel',
+    localField: 'id',
+    foreignField: 'channels'
+})
 
 const Game = mongoose.model('Game', gameSchema);
 module.exports = Game;
