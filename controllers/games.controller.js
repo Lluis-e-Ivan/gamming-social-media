@@ -1,6 +1,7 @@
 const Game = require('../models/game.model');
 const mongoose = require('mongoose');
 const createError = require('http-errors');
+const Channel = require('../models/channel.model');
 
 module.exports.list = (req, res, next) => {
     
@@ -18,7 +19,13 @@ module.exports.list = (req, res, next) => {
 module.exports.details = (req, res, next) => {
     const { id } = req.params;
 
-    Game.findById( id )
+    Game.findById(id)
+        .populate({
+            path: 'yourChannels', 
+            populate: {
+                path: 'game'
+            }
+        })
         .then((game) => {
             if(!game) {
                 next(createError(404, 'Game not found'));

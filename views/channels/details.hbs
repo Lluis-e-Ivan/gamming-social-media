@@ -1,0 +1,24 @@
+{{>navbar}}
+
+<div class="container my-5">
+    <div class="d-flex">
+        <div class="col-1">
+            <img class="rounded-circle border border-2 object-fit-cover" src="{{channel.image}}" alt="Channel Image" width="150" height="150">        
+        </div>
+        <div class="col-10" style="margin: 70px 0 0 80px">
+            <div class="d-flex">
+                <div class="col-8">
+                    <h1>{{channel.name}}</h1>
+                    <p>32k followers</p>
+                </div>
+                <div class="col-4">
+                    <button class="btn btn-primary" style="width:100%">Follow this channel</button>
+                </div>
+            </div>
+            <div style="background-color:#262626; padding: 30px" class="rounded-2 my-3">
+                <p>{{channel.description}}</p>
+            </div>
+            <a href="/game/{{channel.game}}">Volver</a>
+        </div>
+    </div>
+</div>

@@ -64,5 +64,11 @@ userSchema.virtual('yourGames', {
     foreignField: 'user'
 })
 
+userSchema.virtual('yourChannels', {
+    ref: 'UserChannel',
+    localField: '_id',
+    foreignField: 'user'
+})
+
 const User = mongoose.model('User', userSchema);
 module.exports = User;

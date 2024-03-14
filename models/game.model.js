@@ -49,18 +49,14 @@ const gameSchema = new Schema(
         screenshots: {
             type: [Object]
         },
-        channels: {
-            type: mongoose.Types.ObjectId,
-            ref: 'Channel'
-        }
     },
     { timestamps: true }
 );
 
 gameSchema.virtual('yourChannels', {
-    ref: 'Channel',
-    localField: 'id',
-    foreignField: 'channels'
+    ref: 'Channel', // Modelo
+    localField: '_id', // Mi campo que tiene la N
+    foreignField: 'game', // El nombre del campo del modelo "Channel"
 })
 
 const Game = mongoose.model('Game', gameSchema);

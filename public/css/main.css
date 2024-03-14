@@ -1,14 +1,18 @@
-h1, h2, h3, h4, h5 {
-    color: #f5f5f5;
+
+* {
+    font-family: montserrat;
 }
 
 body {
     background-color:#1C1C1C;
 }
 
+h1, h2, h3, h4, h5 {
+    color: #f5f5f5;
+}
+
 p {
     color: #f5f5f5;
-
 }
 
 .ms-n5 {
@@ -107,12 +111,10 @@ hr {
 
 .nav-link {
     color:#f5f5f59e;
-    
 }
 
 .nav-link:hover {
-    color:#f5f5f5;
-    
+    color:#f5f5f5; 
 }
 
 .fa-search {
@@ -129,7 +131,6 @@ hr {
     background-color: #26262600;
     border: 0px solid rgba(0, 0, 0, 0);
     height: 50px;
-    
 }
 
 .dropdown-menu-dark {

@@ -28,14 +28,15 @@ router.post('/edit/:id', secure.isAuthenticated, users.doEdit);
 router.post('/delete/:id', secure.isAuthenticated, users.doDelete);
 
 // Game Routes
-router.get('/games', games.list);
-router.get('/game/:id', games.details);  
+router.get('/games', secure.isAuthenticated, games.list);
+router.get('/game/:id', secure.isAuthenticated, games.details);  
 
 // Channel Routes
-router.get('/game/:id/create-channel', channels.create);
-router.post('/game/:id/create-channel', upload.single('image'), channels.doCreate);
+router.get('/game/:id/create-channel', secure.isAuthenticated, channels.create);
+router.post('/game/:id/create-channel', secure.isAuthenticated, upload.single('image'), channels.doCreate);
+router.get('/channel/:id', secure.isAuthenticated, channels.details);
 
 // Relations Routes
-router.post('/game/:id', users.addGame);
+router.post('/game/:id', secure.isAuthenticated, users.addGame);
 
 module.exports = router;

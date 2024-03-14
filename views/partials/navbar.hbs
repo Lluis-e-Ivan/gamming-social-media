@@ -16,10 +16,10 @@
         </ul>
     </div>
     {{#if currentUser}}
-    <div class="dropdown">
-      
-        <img class="rounded-circle border border-2 object-fit-cover" src="{{currentUser.image}}" type="button" alt="Logo" data-bs-toggle="dropdown" width="45" height="45"/>
-      
+    <div class="dropdown d-flex align-items-center gap-3" type="button" data-bs-toggle="dropdown">
+        <span style="color:#f5f5f5">{{currentUser.username}}</span>
+        <img class="rounded-circle border border-2 object-fit-cover" src="{{currentUser.image}}" alt="Logo" width="45" height="45"/>
+     
       <ul class="dropdown-menu dropdown-menu-dark">
         <li><a class="dropdown-item" href="/profile">See profile</a></li>
         <li>
