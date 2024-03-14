@@ -32,39 +32,52 @@
                 <h4>{{game.short_description}}</h4>
             </div>
             
-            <div class="row justify-content-start my-3">
-                <div class="col-4">
-                    <h5>Genre: {{game.genre}}</h5>
-                    <h5>Release date: {{game.release_date}}</h5>
+            <div class="row justify-content-start mt-5">
+                <div class="col-3 left-line">
+                    <h5>Genre:</h5>
+                    <p>{{game.genre}}</p>
                 </div>
-                <div class="col-4">
-                    <h5>Publisher: {{game.publisher}}</h5>
-                    <h5>Developer: {{game.developer}}</h5>
+                <div class="col-3 left-line">
+                    <h5>Release date:</h5>
+                    <p>{{game.release_date}}</p>
+                </div>
+                <div class="col-3 left-line">
+                    <h5>Publisher:</h5>
+                    <p>{{game.publisher}}</p>
+                </div>
+                <div class="col-3 left-line">
+                    <h5>Developer:</h5>
+                    <p>{{game.developer}}</p>
                 </div>
             </div>
             
-            <h3 class="my-3">Description:</h3>
-            <div style="background-color:#1a1a1a; padding: 30px" class="rounded-3 my-3">
+            <h4 class="mt-5">Description:</h4>
+            <div style="background-color:#262626; padding: 30px" class="rounded-2 my-3">
                 {{{game.description}}}
             </div>
 
-            <h3 class="my-3">System requirements:</h3>
-            <div style="background-color:#1a1a1a; padding: 30px" class="rounded-3 my-3">
-                <h5>System version: <br> {{game.minimum_system_requirements.os}}</h5>
-                <h5>CPU: <br> {{game.minimum_system_requirements.processor}}</h5>
-                <h5>Memory: <br>{{game.minimum_system_requirements.memory}}</h5>
-                <h5>GPU: <br>{{game.minimum_system_requirements.graphics}}</h5>
-                <h5>Storage:<br>{{game.minimum_system_requirements.storage}}</h5>
+            <h4 class="mt-5">System requirements:</h4>
+            <div style="background-color:#262626; padding: 30px" class="rounded-2 my-3">
+                <h5>System version</h5>
+                <p>{{game.minimum_system_requirements.os}}</p>
+                <h5>CPU</h5>
+                <p>{{game.minimum_system_requirements.processor}}</p>
+                <h5>Memory</h5>
+                <p>{{game.minimum_system_requirements.memory}}</p>
+                <h5>GPU</h5>
+                <p>{{game.minimum_system_requirements.graphics}}</p>
+                <h5>Storage</h5>
+                <p>{{game.minimum_system_requirements.storage}}</p>
             </div>
         </div>
         <div class="col-3 my-3">
             <img class="rounded-4" src="{{game.thumbnail}}" style="width: 100%"/>
             <form action="/game/{{game._id}}" method="POST">
-                <button type="submit" style="width: 100%" name="addGame" class="btn btn-primary my-3">Add to your games</button>
+                <button type="submit" style="width: 100%" name="addGame" class="btn btn-primary upper my-3">Add to your games</button>
             </form>
-            <button type="button" style="width: 100%" class="btn btn-secondary mb-3">See in origin</button>
-
-            <a type="button" href="/game/{{game._id}}/create-channel" style="width: 100%" class="btn btn-secondary mb-3">Create new channel</a>
+            <button type="button" style="width: 100%" class="btn btn-outline-light mb-3">See in origin</button>
+            <hr>
+            <a type="button" href="/game/{{game._id}}/create-channel" style="width: 100%" class="btn btn-outline-light my-3">Create new channel</a>
         </div>
     </div>
 </div>
