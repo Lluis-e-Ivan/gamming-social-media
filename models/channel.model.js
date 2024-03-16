@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const Game = require('./game.model')
+const Game = require('./game.model');
+const Post = require('./post.model');
 
 const channelSchema = new Schema(
     {
@@ -29,6 +30,18 @@ const channelSchema = new Schema(
     },
     { timestamps: true }
 );
+
+channelSchema.virtual('yourPosts', {
+    ref: 'Post',
+    localField: '_id',
+    foreignField: 'channel'
+});
+
+channelSchema.virtual('yourComments', {
+    ref: 'Comment',
+    localField: '_id',
+    foreignField: 'post'
+})
 
 const Channel = mongoose.model('Channel', channelSchema);
 module.exports = Channel;

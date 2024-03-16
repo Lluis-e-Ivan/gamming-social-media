@@ -20,6 +20,14 @@
         </div>
         {{/each}}
     </div>
+    <div>
+        {{#each user.yourChannels as |yourChannel|}}
+        <div class="d-flex">
+            <img style="max-width: 100px" src="{{yourChannel.channel.image}}"/>
+            <h1>{{yourChannel.channel.name}}</h1>
+        </div>
+        {{/each}}
+    </div>
 </div>
 
 

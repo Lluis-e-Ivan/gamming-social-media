@@ -1,10 +1,12 @@
 const User = require('../models/user.model');
-const Game = require('../models/game.model')
+const Game = require('../models/game.model');
+const Channel = require('../models/channel.model');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const { sessions } = require('../middlewares/auth.middleware');
 const createError = require('http-errors');
 const UserGame = require('../models/user-game.model');
+const UserChannel = require('../models/user-channel.model');
 
 module.exports.create = (req, res, next) => res.render('users/signup');
 
@@ -68,8 +70,6 @@ module.exports.logout = (req, res, next) => {
 };
 
 module.exports.profile = (req, res, next) => {
-    const { id } = req.params;
-
     User.findById(req.user.id)
         .populate({
             path: 'yourGames', 
@@ -77,9 +77,13 @@ module.exports.profile = (req, res, next) => {
                 path: 'game'
             }
         })
-        .then((user) => {
-            res.render('users/profile', { user })
+        .populate({
+            path: 'yourChannels',
+            populate: {
+                path: 'channel'
+            }
         })
+        .then((user) => res.render('users/profile', { user }))
         .catch(next)
 }
 
@@ -140,4 +144,11 @@ module.exports.addGame = (req, res, next) => {
         .catch(next)
 };
 
- 
+module.exports.addChannel = (req, res, next) => {
+    const channel = req.params.id;
+    const user = req.user.id;
+
+    UserChannel.create({ channel, user })
+        .then(() => res.redirect(`/channel/${channel}`))
+        .catch(next)
+};

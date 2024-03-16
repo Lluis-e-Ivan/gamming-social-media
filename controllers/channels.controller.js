@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const createError = require('http-errors');
 const Channel = require('../models/channel.model');
 const Game = require('../models/game.model');
+const Post = require('../models/post.model');
+
 
 module.exports.create = (req, res, next) => res.render('channels/create', { game: { _id: req.params.id }});
 
@@ -18,7 +20,7 @@ module.exports.doCreate = (req, res, next) => {
 
     Channel.create(channel)
         .then((channel) => {
-            res.redirect('/game/:id/:channel', { channel, game})
+            res.redirect('/games/:id/:channel', { channel, game})
         })
         .catch((error) => {
             if (error instanceof mongoose.Error.ValidationError) {
@@ -31,8 +33,22 @@ module.exports.doCreate = (req, res, next) => {
 
 module.exports.details = (req, res, next) => {
     const { id } = req.params;
-
+    
     Channel.findById(id)
+        .populate({
+            path: 'yourPosts', 
+            populate: {
+                path: 'owner',
+                select: 'image username'
+            }
+        })
+        .populate({
+            path: 'yourComments',
+            populate: {
+                path: 'owner',
+                select: 'image username'
+            }
+        })
         .then((channel) => {
             if(!channel) {
                 next(createError(404, 'Channel not found'));

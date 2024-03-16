@@ -72,16 +72,16 @@
         </div>
         <div class="col-3 my-3">
             <img class="rounded-4" src="{{game.thumbnail}}" style="width: 100%"/>
-            <form action="/game/{{game._id}}" method="POST">
+            <form action="/games/{{game._id}}" method="POST">
                 <button type="submit" style="width: 100%" name="addGame" class="btn btn-primary upper my-3">Add to your games</button>
             </form>
             <button type="button" style="width: 100%" class="btn btn-outline-light mb-3">See in origin</button>
             <hr>
-            <a type="button" href="/game/{{game._id}}/create-channel" style="width: 100%" class="btn btn-outline-light my-3">Create new channel</a>
+            <a type="button" href="/games/{{game._id}}/create-channel" style="width: 100%" class="btn btn-outline-light my-3">Create new channel</a>
             {{#each game.yourChannels as |yourChannel|}}
             <div>
                 <img class="rounded-circle border border-2 object-fit-cover" src="{{yourChannel.image}}" width="45" height="45">
-                <a href="/channel/{{yourChannel.id}}">{{yourChannel.name}}</a>
+                <a href="/channels/{{yourChannel.id}}">{{yourChannel.name}}</a>
             </div>
             {{/each}}
         </div>

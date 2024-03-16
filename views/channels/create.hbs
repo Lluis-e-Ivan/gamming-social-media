@@ -4,7 +4,7 @@
     <h1>Channel create</h1>
 </div>
 
-<form class="container" action="/game/{{game._id}}/create-channel" method="POST" enctype="multipart/form-data">
+<form class="container" action="/games/{{game._id}}/create-channel" method="POST" enctype="multipart/form-data">
 
     <div class="col form-floating mb-3">
         <input type="text" name="name" class="form-control {{#if errors.name}} is-invalid {{/if}}" id="floatingInput" placeholder="Channel name" >

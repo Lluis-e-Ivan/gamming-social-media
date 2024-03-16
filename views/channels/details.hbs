@@ -11,14 +11,49 @@
                     <h1>{{channel.name}}</h1>
                     <p>32k followers</p>
                 </div>
-                <div class="col-4">
-                    <button class="btn btn-primary" style="width:100%">Follow this channel</button>
-                </div>
+                <form class="col-4" action="/channel/{{channel.id}}" method="POST">
+                    <div>
+                        <button class="btn btn-primary" style="width:100%">Follow this channel</button>
+                    </div> 
+                </form>
             </div>
             <div style="background-color:#262626; padding: 30px" class="rounded-2 my-3">
                 <p>{{channel.description}}</p>
             </div>
-            <a href="/game/{{channel.game}}">Volver</a>
+            <a href="/games/{{channel.game}}">Volver</a>
+            <div class="my-3">
+                <form action="/channels/{{channel._id}}/post" method="POST">
+                    <div class="form-floating">
+                        <textarea name="text" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                        <label for="floatingTextarea2">Post content</label>
+                    </div>
+                    <button class="btn btn-primary my-3" style="width:25%">Post</button>
+                </form>
+            </div>
+            <div>
+                {{#each channel.yourPosts as |yourPost|}}
+                <div class="d-flex gap-3 rounded-2 my-3" style="background-color:#262626; padding: 30px" id="{{yourPost.id}}">
+                    <img width="30" height="30" class="rounded-circle border border-2 object-fit-cover" src="{{yourPost.owner.image}}"/>
+                    <div class="w-100">
+                        <p>{{yourPost.owner.username}}</p>
+                        <p>{{yourPost.text}}</p>
+                        <div>
+                            <form action="/posts/{{yourPost.id}}/comments" method="POST" class="d-flex gap-2">
+                                <div class="form-floating w-100">
+                                    <textarea class="form-control" name="text" style="background-color:#3a3a3a !important" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                                    <label for="floatingTextarea">Comments</label>
+                                </div>
+                                <button class="btn btn-primary" type="submit">Comment</button>
+                                {{#each channel.yourPost.yourComments as |comment|}}
+                                    <p>{{comment.owner.username}}</p>
+                                    <p>{{comment.text}}</p>
+                                {{/each}}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
         </div>
     </div>
 </div>
