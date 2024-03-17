@@ -44,12 +44,17 @@
                                     <label for="floatingTextarea">Comments</label>
                                 </div>
                                 <button class="btn btn-primary" type="submit">Comment</button>
-                                {{#each channel.yourPost.yourComments as |comment|}}
-                                    <p>{{comment.owner.username}}</p>
-                                    <p>{{comment.text}}</p>
-                                {{/each}}
                             </form>
                         </div>
+                        {{#each yourPost.yourComments as |comment|}}
+                        <div class="rounded-2 my-3" style="background-color:#191919; padding: 30px">
+                            <div class="d-flex gap-2 " >
+                                <img width="20" height="20" class="rounded-circle border border-2 object-fit-cover" src="{{comment.owner.image}}"/>
+                                <p>{{comment.owner.username}}</p>
+                            </div>
+                            <p>{{comment.text}}</p>
+                        </div>
+                        {{/each}}
                     </div>
                 </div>
                 {{/each}}

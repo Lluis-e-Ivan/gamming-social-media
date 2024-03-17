@@ -40,13 +40,17 @@ module.exports.details = (req, res, next) => {
             populate: {
                 path: 'owner',
                 select: 'image username'
-            }
+            },
         })
         .populate({
-            path: 'yourComments',
+            path: 'yourPosts',
             populate: {
-                path: 'owner',
-                select: 'image username'
+                path: 'yourComments',
+                model: 'Comment',
+                populate: {
+                    path: 'owner',
+                    model: 'User'
+                }
             }
         })
         .then((channel) => {

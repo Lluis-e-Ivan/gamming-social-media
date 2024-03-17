@@ -77,6 +77,10 @@ label {
     background-color: #ffffff39;;
 }
 
+.btn-outline-primary {
+    width:fit-content;
+}
+
 .upper {
     text-transform: uppercase;
 }
@@ -89,6 +93,10 @@ hr {
 
 .left-line {
     border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bottom-line {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .card {
@@ -141,4 +149,18 @@ hr {
     -webkit-box-shadow: -4px 6px 17px 0px rgba(0,0,0,0.55);
     -moz-box-shadow: -4px 6px 17px 0px rgba(0,0,0,0.55);
     box-shadow: -4px 6px 17px 0px rgba(0,0,0,0.55);
+}
+
+.list-group-item-dark {
+    background-color:#1C1C1C;
+    border: 0px;
+}
+
+.list-group-item-dark:hover {
+    background-color:#343434;
+    border: 0px;
+}
+
+.max-elements:nth-of-type(n+7) {
+    display:none;
 }

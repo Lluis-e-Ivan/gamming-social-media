@@ -1,19 +1,32 @@
 const Game = require('../models/game.model');
+const User = require('../models/user.model');
 const mongoose = require('mongoose');
 const createError = require('http-errors');
 const Channel = require('../models/channel.model');
 
 module.exports.list = (req, res, next) => {
     
-    Game.find()
-        .then((games) => {
-            if(!games) {
-                next(createError(404, 'Games list not found'));
-            } else {
-                res.render('games/list', { games });
+    User.findById(req.user.id)
+        .populate({
+            path: 'yourGames', 
+            populate: {
+                path: 'game'
             }
         })
-        .catch(next);
+        .then((user) => {
+            Game.find()
+            .then((games) => {
+                if(!games) {
+                    next(createError(404, 'Games list not found'));
+                } else {
+                    res.render('games/list', { games, user});
+                }
+            })
+            .catch(next);
+        })
+        .catch(next)
+    
+    
 };
 
 module.exports.details = (req, res, next) => {

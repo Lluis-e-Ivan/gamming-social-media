@@ -12,31 +12,57 @@
 <div class="container">
     <div class="card-header">
         <ul class="nav nav-underline">
-            <li class="nav-item">
-                <a class="nav-link active" style="color:white" href="#">All games</a>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" style="color:white" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">All games</a>
             </li>
-            <li class="nav-item-secondary">
-                <a class="nav-link" href="#">Your games</a>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" style="color:white" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Your games</a>
             </li>
         </ul>
     </div>
-    <div class="card-body">
-        <div class="container my-3">
-            <div class="row justify-content-around">
-                {{#each games}}
-                <div class="col-3">
-                    <div class="my-3">
-                        <div class="card mb-3" style="">
-                            <img src="{{thumbnail}}" class="card-img-top" alt="...">
-                            <div class="card-body text-truncate-container">
-                                <h5 class="">{{title}}</h5>
-                                <p class="card-text">{{short_description}}</p>
-                                <a href="/games/{{_id}}" class="btn btn-primary-card">Details</a>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+            <div class="card-body">
+                <div class="container my-3">
+                    <div class="row justify-content-around">
+                        {{#each games}}
+                        <div class="col-3">
+                            <div class="my-3">
+                                <div class="card mb-3" style="">
+                                    <img src="{{thumbnail}}" class="card-img-top" alt="...">
+                                    <div class="card-body text-truncate-container">
+                                        <h5 class="">{{title}}</h5>
+                                        <p class="card-text">{{short_description}}</p>
+                                        <a href="/games/{{_id}}" class="btn btn-primary-card">Details</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        {{/each}}
                     </div>
                 </div>
-                {{/each}}
+            </div>
+        </div>
+        <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+            <div class="card-body">
+                <div class="container my-3">
+                    <div class="row justify-content-around">
+                        {{#each user.yourGames as |yourGame|}}
+                        <div class="col-3">
+                            <div class="my-3">
+                                <div class="card mb-3" style="">
+                                    <img src="{{yourGame.game.thumbnail}}" class="card-img-top" alt="...">
+                                    <div class="card-body text-truncate-container">
+                                        <h5 class="">{{yourGame.game.title}}</h5>
+                                        <p class="card-text">{{yourGame.game.short_description}}</p>
+                                        <a href="/games/{{yourGame.game._id}}" class="btn btn-primary-card">Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

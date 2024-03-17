@@ -8,7 +8,8 @@ const channelSchema = new Schema(
         name: {
             type: String,
             required: [true, 'Channel name is required'],
-            minLength: [2, 'Channel name needs at least 2 chars']
+            minLength: [2, 'Channel name needs at least 2 chars'],
+            unique: true
         },
         description: {
             type: String
@@ -36,12 +37,6 @@ channelSchema.virtual('yourPosts', {
     localField: '_id',
     foreignField: 'channel'
 });
-
-channelSchema.virtual('yourComments', {
-    ref: 'Comment',
-    localField: '_id',
-    foreignField: 'post'
-})
 
 const Channel = mongoose.model('Channel', channelSchema);
 module.exports = Channel;

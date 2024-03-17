@@ -80,7 +80,12 @@ module.exports.profile = (req, res, next) => {
         .populate({
             path: 'yourChannels',
             populate: {
-                path: 'channel'
+                path: 'channel',
+                model: 'Channel',
+                populate: {
+                    path: 'game',
+                    model: 'Game'
+                }
             }
         })
         .then((user) => res.render('users/profile', { user }))

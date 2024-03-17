@@ -1,34 +1,64 @@
 {{>navbar}}
 
 <div class="container">
-    <div class="d-flex">
-        <div class="container my-3">
-            <h1>{{currentUser.username}}</h1>
-            <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla, natus quod eaque non soluta modi voluptatem, dolorem quos molestias dolorum aut unde reprehenderit voluptate deleniti eum quidem cum odio fugiat?</p>
-            <a class="btn btn-primary" href="/edit/{{currentUser.id}}">Edit profile</a>
+    <div class="my-5 bottom-line">
+    <div class="d-flex mb-5">
+        <div>
+            <img class="rounded-circle border border-2 object-fit-cover" src="{{currentUser.image}}" alt="Logo" width="200" height="200"/>
         </div>
-        <div class="my-3">
-                    <img class="rounded-circle border border-2 object-fit-cover" src="{{currentUser.image}}" alt="Logo" width="200" height="200"/>
+        <div class="container mx-5 d-flex">
+            <div class="col-11">
+                <h1>{{currentUser.username}}</h1>
+                <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla, natus quod eaque non soluta modi voluptatem, dolorem quos molestias dolorum aut unde reprehenderit voluptate deleniti eum quidem cum odio fugiat?</p>
+            </div>
+            <div class="col-2 my-4">
+                <a class="btn btn-outline-primary position-relative top-0 start-50 translate-middle" href="/edit/{{currentUser.id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+            </div>
         </div>
     </div>
-
-    <div>
-        {{#each user.yourGames as |yourGame|}}
-        <div class="d-flex">
-            <img style="max-width: 100px" src="{{yourGame.game.thumbnail}}"/>
-            <h1>{{yourGame.game.title}}</h1>
-        </div>
-        {{/each}}
     </div>
-    <div>
-        {{#each user.yourChannels as |yourChannel|}}
-        <div class="d-flex">
-            <img style="max-width: 100px" src="{{yourChannel.channel.image}}"/>
-            <h1>{{yourChannel.channel.name}}</h1>
+    <div class="d-flex gap-3 my-5">
+        <div class="col-6">
+            <div class="d-flex justify-content-between my-3">
+                <h5>Your games</h5>
+                <a href="/games" class="btn btn-outline-light">See more</a>
+            </div>
+            {{#each user.yourGames as |yourGame|}}
+            <div class="list-group my-3 max-elements">
+                <a href="/games/{{yourGame.game._id}}" class="list-group-item list-group-item-dark" aria-current="true">
+                <div class="d-flex w-100 justify-content-left gap-3">
+                    <img style="max-width: 100px" src="{{yourGame.game.thumbnail}}"/>
+                    <div class="text-truncate-container">
+                        <h5 class="mb-1">{{yourGame.game.title}}</h5>
+                        <p>{{yourGame.game.genre}}</p>
+                    </div>
+                </div>
+                </a>
+            </div>
+            {{/each}}      
         </div>
-        {{/each}}
+        <div class="col-6 left-line">
+            <div class="d-flex justify-content-between my-3 mx-3">
+                <h5>Your channels</h5>
+                <button class="btn btn-outline-light">See more</button>
+            </div>
+            {{#each user.yourChannels as |yourChannel|}}
+            <div class="list-group my-3 mx-3 max-elements">
+                <a href="/channels/{{yourChannel.channel.id}}" class="list-group-item list-group-item-dark" aria-current="true">
+                <div class="d-flex w-100 justify-content-left gap-3">
+                    <img style="max-width: 100px" src="{{yourChannel.channel.image}}"/>
+                    <div class="text-truncate-container">
+                        <h5 class="mb-1">{{yourChannel.channel.name}}</h5>
+                        <p>{{yourChannel.channel.game.title}}</p>
+                    </div>
+                </div>
+                </a>
+            </div>
+            {{/each}}
+        </div>
     </div>
 </div>
+
 
 
 
