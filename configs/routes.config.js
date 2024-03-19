@@ -17,6 +17,9 @@ router.get('/',  (req, res, next) => res.render('misc/home'));
 router.get('/signup', users.create);
 router.post('/signup', upload.single('image'), users.doCreate);
 
+router.get('/signup-games', users.fillGames);
+
+
 router.get('/login', users.login);
 router.post('/login', users.doLogin);
 
@@ -39,8 +42,12 @@ router.post('/games/:id/create-channel', secure.isAuthenticated, upload.single('
 router.get('/channels/:id', secure.isAuthenticated, channels.details);
 
 // Relations Routes
+router.post('/games/:id/delete', secure.isAuthenticated, users.deleteGame);
+router.post('/games/:id/addGameForm', users.addGameForm);
 router.post('/games/:id', secure.isAuthenticated, users.addGame);
+router.post('/channels/:id/delete', secure.isAuthenticated, users.deleteChannel);
 router.post('/channels/:id', secure.isAuthenticated, users.addChannel);
+
 
 // Post Routes
 router.post('/channels/:id/post', secure.isAuthenticated, posts.doCreate);

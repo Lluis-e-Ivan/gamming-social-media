@@ -3,7 +3,7 @@ const createError = require('http-errors');
 const Channel = require('../models/channel.model');
 const Game = require('../models/game.model');
 const Post = require('../models/post.model');
-
+const UserChannel = require('../models/user-channel.model');
 
 module.exports.create = (req, res, next) => res.render('channels/create', { game: { _id: req.params.id }});
 
@@ -57,7 +57,13 @@ module.exports.details = (req, res, next) => {
             if(!channel) {
                 next(createError(404, 'Channel not found'));
             } else {
-                res.render('channels/details', { channel });
+                return UserChannel.findOne({
+                    user: req.user.id,
+                    channel: channel.id
+                })
+                    .then(userchannel => {
+                        res.render('channels/details', { channel, userchannel });
+                    })
             }
         })
         .catch(next);

@@ -3,6 +3,7 @@ const User = require('../models/user.model');
 const mongoose = require('mongoose');
 const createError = require('http-errors');
 const Channel = require('../models/channel.model');
+const UserGame = require('../models/user-game.model');
 
 module.exports.list = (req, res, next) => {
     
@@ -43,7 +44,13 @@ module.exports.details = (req, res, next) => {
             if(!game) {
                 next(createError(404, 'Game not found'));
             } else {
-                res.render('games/details', { game });
+                return UserGame.findOne({
+                    user: req.user.id,
+                    game: game._id
+                })
+                    .then(usergame => {
+                        res.render('games/details', { game, usergame });
+                    })
             }
         })
         .catch(next);

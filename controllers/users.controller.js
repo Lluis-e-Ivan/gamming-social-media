@@ -27,8 +27,18 @@ module.exports.doCreate = (req, res, next) => {
                     phone: req.body.phone,
                     birthDate: req.body.birthDate
                 };
-                return User.create(user)
-                    .then(() => res.redirect('/login'));
+                User.create(user)
+                    .then((user) => {
+                        req.session.userId = user.id;
+                        res.redirect('/signup-games');
+                    })
+                    .catch((error) => {
+                        if (error instanceof mongoose.Error.ValidationError) {
+                            res.status(400).render('users/signup', { user: req.body, errors: error.errors });
+                        } else {
+                            console.error(error);
+                        }
+                    }); 
             };
         })
         .catch((error) => {
@@ -38,6 +48,28 @@ module.exports.doCreate = (req, res, next) => {
                 console.error(error);
             }
         });
+};
+
+module.exports.fillGames = (req, res, next) => {
+
+    Game.find()
+        .then((games) => {
+            if (!games) {
+                next(createError(404, 'Games list not found'));
+            } else {
+                return UserGame.find({user: req.user.id})
+                    .then(usergame => {
+                        const userGameId = usergame ? usergame.map(game => game.game.toString()) : [];
+                        const finalGames = games.map(game => {
+                            game.alreadyAdded = userGameId.includes(game._id.toString());
+                            return game;
+                        })
+                        res.render('users/formGames', { games: finalGames });
+                    })
+            }
+        })
+        .catch(next);
+    
 };
 
 module.exports.login = (req, res, next) => res.render('users/login');
@@ -117,7 +149,7 @@ module.exports.doEdit = (req, res, next) => {
                 next(createError(404, 'User not found'));
             } else {
                 Object.assign(user, patch)
-                return user.save()
+                return user.save();
             }
         })
         .then((user) => {
@@ -137,7 +169,7 @@ module.exports.doDelete = (req, res, next) => {
 
     User.findByIdAndDelete(id)
         .then(() => res.redirect('/login'))
-        .catch(next)
+        .catch(next);
 };
 
 module.exports.addGame = (req, res, next) => {
@@ -145,8 +177,15 @@ module.exports.addGame = (req, res, next) => {
     const user = req.user.id;
     
     UserGame.create({ game, user })     
-        .then(() => res.redirect(`/game/${game}`))
-        .catch(next)
+        .then(() => res.redirect(`/games/${game}`))
+        .catch(next);
+};
+
+module.exports.deleteGame = (req, res, next) => {
+
+    UserGame.findOneAndDelete({ user: req.user.id, game: req.params.id})
+        .then(() => res.redirect(`/games/${req.params.id}`))
+        .catch(next);
 };
 
 module.exports.addChannel = (req, res, next) => {
@@ -154,6 +193,32 @@ module.exports.addChannel = (req, res, next) => {
     const user = req.user.id;
 
     UserChannel.create({ channel, user })
-        .then(() => res.redirect(`/channel/${channel}`))
-        .catch(next)
+        .then(() => res.redirect(`/channels/${channel}`))
+        .catch(next);
+};
+
+module.exports.deleteChannel = (req, res, next) => {
+
+    UserChannel.findOneAndDelete({ user: req.user.id, channel: req.params.id})
+        .then(() => res.redirect(`/channels/${req.params.id}`))
+        .catch(next);
+};
+
+
+module.exports.addGameForm = (req, res, next) => {
+    const { id } = req.params;
+    const user = req.user.id;
+
+    Game.findById(id)
+        .then((game) => {
+            if(!game) {
+                next(createError(404, 'Game not found'));
+            } else {
+                return UserGame.create({ game, user })     
+                    .then(() => res.redirect(`/signup-games`))
+                    .catch(next);
+
+            }
+        })
+        .catch(next);
 };

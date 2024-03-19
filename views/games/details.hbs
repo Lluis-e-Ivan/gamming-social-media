@@ -72,9 +72,16 @@
         </div>
         <div class="col-3 my-3">
             <img class="rounded-4" src="{{game.thumbnail}}" style="width: 100%"/>
-            <form action="/games/{{game._id}}" method="POST">
-                <button type="submit" style="width: 100%" name="addGame" class="btn btn-primary upper my-3">Add to your games</button>
-            </form>
+            {{#if usergame}}
+                <form action="/games/{{game._id}}/delete" method="POST">
+                    <button type="submit" style="width: 100%" name="addGame" class="btn btn-outline-light upper my-3">Delete from your games</button>
+                </form> 
+            {{else}}
+                <form action="/games/{{game._id}}" method="POST">
+                    <button type="submit" style="width: 100%" name="addGame" class="btn btn-primary upper my-3">Add to your games</button>
+                </form>
+            {{/if}}
+        
             <button type="button" style="width: 100%" class="btn btn-outline-light mb-3">See in origin</button>
             <hr>
             <a type="button" href="/games/{{game._id}}/create-channel" style="width: 100%" class="btn btn-outline-light my-3">Create new channel</a>

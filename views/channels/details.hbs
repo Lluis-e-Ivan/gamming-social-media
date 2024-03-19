@@ -11,11 +11,21 @@
                     <h1>{{channel.name}}</h1>
                     <p>32k followers</p>
                 </div>
-                <form class="col-4" action="/channel/{{channel.id}}" method="POST">
+
+                {{#if userchannel}}
+                <form class="col-4" action="/channels/{{channel.id}}/delete" method="POST">
+                    <div>
+                        <button class="btn btn-outline-light" style="width:100%">Unfollow this channel</button>
+                    </div> 
+                </form> 
+                {{else}}
+                <form class="col-4" action="/channels/{{channel.id}}" method="POST">
                     <div>
                         <button class="btn btn-primary" style="width:100%">Follow this channel</button>
                     </div> 
                 </form>
+                {{/if}}
+                
             </div>
             <div style="background-color:#262626; padding: 30px" class="rounded-2 my-3">
                 <p>{{channel.description}}</p>
