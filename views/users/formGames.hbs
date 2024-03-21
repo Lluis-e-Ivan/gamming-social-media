@@ -11,24 +11,25 @@
         </span>
     </div>
 </div>
-<div class="container d-flex justify-content-between">
-    <a href="" class="btn btn-outline-light">Skip</a>
-    <a href="" class="btn btn-primary">Next</a>
-</div>
+<form action="/signup-channels" method="GET">
+    <div class="container d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary">Next</button>
+    </div>
+</form>
 <div class="card-body">
     <div class="container my-3">
         <div class="row justify-content-around">
             {{#each games}}
             <div class="col-3">
                 <div class="my-3">
-                    <div class="card mb-3" style="">
+                    <div class="card mb-3">
                         <img src="{{thumbnail}}" class="card-img-top" alt="...">
                         <div class="card-body text-truncate-container">
                             <h5 class="">{{title}}</h5>
                             <p class="card-text">{{short_description}}</p>
                             {{#if this.alreadyAdded}}
-                                <form action="/games/{{_id}}/delete" method="POST">
-                                    <button type="submit" style="width: 100%" name="addGame" class="btn btn-outline-light upper my-3">Delete from your games</button>
+                                <form action="/games/{{_id}}/deleteGameForm" method="POST">
+                                    <button type="submit" style="width: 100%" name="deleteGame" class="btn btn-outline-light upper my-3">Delete from your games</button>
                                 </form> 
                             {{else}}
                                 <form action="/games/{{_id}}/addGameForm" method="POST">

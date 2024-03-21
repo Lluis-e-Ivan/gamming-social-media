@@ -58,18 +58,46 @@ module.exports.fillGames = (req, res, next) => {
                 next(createError(404, 'Games list not found'));
             } else {
                 return UserGame.find({user: req.user.id})
-                    .then(usergame => {
-                        const userGameId = usergame ? usergame.map(game => game.game.toString()) : [];
+                    .then(usergames => {
+                        const userGameId = usergames ? usergames.map(game => game.game.toString()) : [];
                         const finalGames = games.map(game => {
                             game.alreadyAdded = userGameId.includes(game._id.toString());
                             return game;
                         })
                         res.render('users/formGames', { games: finalGames });
                     })
+                    .catch(next)
             }
         })
         .catch(next);
     
+};
+
+module.exports.fillChannels = (req, res, next) => {
+
+    UserGame.find({user: req.user.id})
+        .populate({
+            path: 'game',
+            populate: {
+                path: 'yourChannels',
+                populate: {
+                    path: 'game'
+                }
+            }
+        })
+        .then((games) => {
+            const channels = games.map(game => game.game.yourChannels).flat();
+            return UserChannel.find({user: req.user.id})
+                .then(userchannels => {
+                    const userChannelId = userchannels ? userchannels.map(channel => channel.channel.toString()) : [];
+                    const finalChannels = channels.map(channel => {
+                        channel.alreadyAdded = userChannelId.includes(channel._id.toString());
+                        return channel;
+                    })
+                    res.render('users/formChannels', { channels: finalChannels });
+                })
+        })
+        .catch(next)
 };
 
 module.exports.login = (req, res, next) => res.render('users/login');
@@ -211,14 +239,65 @@ module.exports.addGameForm = (req, res, next) => {
 
     Game.findById(id)
         .then((game) => {
-            if(!game) {
+            if (!game) {
                 next(createError(404, 'Game not found'));
             } else {
                 return UserGame.create({ game, user })     
-                    .then(() => res.redirect(`/signup-games`))
+                    .then(() => res.redirect('/signup-games'))
                     .catch(next);
 
             }
         })
         .catch(next);
 };
+
+module.exports.deleteGameForm = (req, res, next) => {
+    const { id } = req.params;
+    const user = req.user.id;
+
+    Game.findById(id)
+        .then((game) => {
+            if(!game) {
+                next(createError(404, 'Game not found'));
+            } else {
+                return UserGame.deleteOne({ game, user })
+                    .then(() => res.redirect('/signup-games'))
+                    .catch(next);
+            }   
+        })
+        .catch(next)
+}
+
+module.exports.addChannelForm = (req, res, next) => {
+    const { id } = req.params;
+    const user = req.user.id;
+
+    Channel.findById(id)
+        .then((channel) => {
+            if (!channel) {
+                next(createError(404, 'Channel not found'));
+            } else {
+                return UserChannel.create({ channel, user })
+                    .then(() => res.redirect('/signup-channels'))
+                    .catch(next);
+            }
+        })
+        .catch(next)
+}
+
+module.exports.deleteChannelForm = (req, res, next) => {
+    const { id } = req.params;
+    const user = req.user.id;
+
+    Channel.findById(id)
+        .then((channel) => {
+            if(!channel) {
+                next(createError(404, 'Channel not found'));
+            } else {
+                return UserChannel.deleteOne({ channel, user })
+                    .then(() => res.redirect('/signup-channels'))
+                    .catch(next);
+            }   
+        })
+        .catch(next)
+}

@@ -1,3 +1,37 @@
 {{>navbar}}
 
-<h1>Según los juegos elegidos te puede interesar:</h1>
+<div class="container my-3">
+    <h3>Depending on the games chosen, you may be interested in these channels:</h3>
+    <form action="/profile" method="GET">
+        <div class="container d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary">Finish</button>
+        </div>
+    </form>
+    <div class="my-3">
+    {{#each channels as |channel|}}
+    <div class="card mb-3">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="{{channel.image}}" class="img-fluid rounded-start" style="width: 300px" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="">{{channel.name}}</h5>
+                    <p class=""><small class="">{{channel.game.title}}</small></p>
+                    <p class="">{{channel.description}}</p>
+                    {{#if this.alreadyAdded}}
+                        <form action="/channels/{{_id}}/deleteChannelForm" method="POST">
+                            <button type="submit" style="width: 20%" name="deleteChannel" class="btn btn-outline-light upper">Delete from your channels</button>
+                        </form> 
+                    {{else}}
+                        <form action="/channels/{{_id}}/addChannelForm" method="POST">
+                            <button type="submit" style="width: 30%" name="addChannel" class="btn btn-primary upper">Add to your channels</button>
+                        </form>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+    </div>
+</div>

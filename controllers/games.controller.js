@@ -36,9 +36,6 @@ module.exports.details = (req, res, next) => {
     Game.findById(id)
         .populate({
             path: 'yourChannels', 
-            populate: {
-                path: 'game'
-            }
         })
         .then((game) => {
             if(!game) {

@@ -81,6 +81,15 @@ label {
     width:fit-content;
 }
 
+.btn-comment {
+    background-color: #10101400;
+    color:#d0d0d0;
+    padding: 15px 0 15px 0;
+}
+.btn-comment:hover {
+    color:#f5f5f5
+}
+
 .upper {
     text-transform: uppercase;
 }
@@ -163,4 +172,17 @@ hr {
 
 .max-elements:nth-of-type(n+7) {
     display:none;
+}
+
+.modal-content {
+    background-color:#343434;
+}
+
+.modal-header {
+    border-color: #565656;
+}
+
+.modal-footer {
+    border-color: #565656;
+    width: 100%;
 }

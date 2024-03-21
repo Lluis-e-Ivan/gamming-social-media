@@ -1,0 +1,19 @@
+{{>navbar}}
+ 
+{{#each news as |content|}}
+    <div class="card mb-3">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="{{content.main_image}}" class="img-fluid rounded-start" style="width: 300px" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="">{{content.title}}</h5>
+                    <p class=""><small class="">{{content.short_description}}</small></p>
+                    <p class="">{{{content.article_content}}}</p>
+                    <p class="">{{content.article_url}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/each}}
