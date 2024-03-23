@@ -1,6 +1,7 @@
 const User = require('../models/user.model');
 const Game = require('../models/game.model');
 const Channel = require('../models/channel.model');
+const Post = require('../models/post.model');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const { sessions } = require('../middlewares/auth.middleware');
@@ -301,3 +302,44 @@ module.exports.deleteChannelForm = (req, res, next) => {
         })
         .catch(next)
 }
+
+module.exports.feed = (req, res, next) => {
+
+    User.findById(req.user.id)
+        .populate({
+            path: 'yourGames', 
+            populate: {
+                path: 'game'
+            }
+        })
+        .populate({
+            path: 'yourChannels',
+            populate: {
+                path: 'channel',
+                model: 'Channel',
+                populate: {
+                    path: 'yourPosts',
+                    model: 'Post',
+                    populate: {
+                        path: 'owner',
+                        model: 'User'
+                    },
+                    populate: {
+                        path: 'yourComments',
+                        model: 'Comment',
+                        populate: {
+                            path: 'owner',
+                            model: 'User'
+                        }
+                    }
+                }
+            }
+        })
+        
+        .then((user) => {
+            const posts = user.yourChannels.flatMap(channel => channel.channel.yourPosts);
+            console.log(posts)
+            res.render('misc/home', { user, posts })
+        })
+        .catch(next)
+};

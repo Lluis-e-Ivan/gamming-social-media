@@ -20,14 +20,21 @@ module.exports.list = (req, res, next) => {
                 if(!games) {
                     next(createError(404, 'Games list not found'));
                 } else {
-                    res.render('games/list', { games, user});
+                    return UserGame.find({user: req.user.id})
+                    .then(usergames => {
+                        const userGameId = usergames ? usergames.map(game => game.game.toString()) : [];
+                        const finalGames = games.map(game => {
+                            game.alreadyAdded = userGameId.includes(game._id.toString());
+                            return game;
+                        })
+                        res.render('games/list', { games: finalGames, user });
+                    })
+                    .catch(next)
                 }
             })
             .catch(next);
         })
         .catch(next)
-    
-    
 };
 
 module.exports.details = (req, res, next) => {
@@ -52,3 +59,38 @@ module.exports.details = (req, res, next) => {
         })
         .catch(next);
 };
+
+module.exports.addGameList = (req, res, next) => {
+    const { id } = req.params;
+    const user = req.user.id;
+
+    Game.findById(id)
+        .then((game) => {
+            if (!game) {
+                next(createError(404, 'Game not found'));
+            } else {
+                return UserGame.create({ game, user })     
+                    .then(() => res.redirect('/games'))
+                    .catch(next);
+
+            }
+        })
+        .catch(next);
+};
+
+module.exports.deleteGameList = (req, res, next) => {
+    const { id } = req.params;
+    const user = req.user.id;
+
+    Game.findById(id)
+        .then((game) => {
+            if(!game) {
+                next(createError(404, 'Game not found'));
+            } else {
+                return UserGame.deleteOne({ game, user })
+                    .then(() => res.redirect('/games'))
+                    .catch(next);
+            }   
+        })
+        .catch(next)
+}

@@ -4,7 +4,7 @@ const Game = require('../models/game.model');
 const News = require('../models/news.model.js');
 
 const axios = require('axios');
-/*
+
 Game.deleteMany({})
     .then(() => {
         axios.get('https://www.mmobomb.com/api1/games')
@@ -38,7 +38,7 @@ Game.deleteMany({})
                     }, i * 1000)
                 })
             })
-    });*/
+    });
 
     News.deleteMany({})
     .then(() => {

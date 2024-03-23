@@ -84,11 +84,20 @@
         
             <button type="button" style="width: 100%" class="btn btn-outline-light mb-3">See in origin</button>
             <hr>
-            <a type="button" href="/games/{{game._id}}/create-channel" style="width: 100%" class="btn btn-outline-light my-3">Create new channel</a>
+            <div class="d-flex justify-content-between my-3 align-items-center">
+                <h5>Your channels</h5>
+                <a type="button" href="/games/{{game._id}}/create-channel" class="btn btn-outline-light-circle"><i class="fa-solid fa-plus"></i></a>
+            </div>
             {{#each game.yourChannels as |yourChannel|}}
-            <div>
-                <img class="rounded-circle border border-2 object-fit-cover" src="{{yourChannel.image}}" width="45" height="45">
-                <a href="/channels/{{yourChannel.id}}">{{yourChannel.name}}</a>
+            <div class="list-group my-3 max-elements-feed">
+                <a href="/channels/{{yourChannel.id}}" class="list-group-item list-group-item-dark" aria-current="true">
+                <div class="d-flex w-100 justify-content-left gap-3 align-items-center">
+                    <img style="max-height: 35px; border-radius: 3px;" src="{{yourChannel.image}}"/>
+                    <div class="text-truncate-container">
+                        <h5 style="margin-bottom: 0;">{{yourChannel.name}}</h5>
+                    </div>
+                </div>
+                </a>
             </div>
             {{/each}}
         </div>

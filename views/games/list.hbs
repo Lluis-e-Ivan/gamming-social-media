@@ -1,24 +1,57 @@
 {{>navbar}}
 
-<div class="input-group container my-3">
-    <input class="form-control bg-search border-end-0 rounded-pill" style="padding-left:30px" type="search" value="Search" id="example-search-input">
-    <span class="input-group-append">
-        <button class="btn btn-dark bg-icon-search border-bottom-0 rounded-pill ms-n5" type="button">
-            <i class="fa fa-search"></i>
-        </button>
-    </span>
-</div>
 
-<div class="container">
-    <div class="card-header">
-        <ul class="nav nav-underline">
-            <li class="nav-item" role="presentation">
-                <a class="nav-link active" style="color:white" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">All games</a>
-            </li>
-            <li class="nav-item" role="presentation">
-                <a class="nav-link" style="color:white" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Your games</a>
-            </li>
-        </ul>
+
+<div class="container my-3">
+    <div class="card-header d-flex justify-content-between">
+        <div class="col-3">
+            <ul class="nav nav-underline">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" style="color:white" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">All games</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" style="color:white" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Your games</a>
+                </li>
+            </ul>
+        </div>
+        <div id="search" class="col-6">
+            <input class="form-control bg-search border-end-0 rounded-pill" placeholder="Search" style="padding-left:30px" id="searchInput" type="text">
+        </div>
+        <div class="col-3 d-flex justify-content-end">
+            <button style="width:50%" class="btn btn-outline-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Filters</button>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasRightLabel">Filters</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <div>
+                        <p>Here you have some filters and order methods to make your experience more confortable 😊</p>
+                    </div>
+                    <div class="mt-3">
+                        <h5>Filter by genre</h5>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Default checkbox
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Default checkbox
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Default checkbox
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
@@ -26,18 +59,29 @@
                 <div class="container my-3">
                     <div class="row justify-content-around">
                         {{#each games}}
-                        <div class="col-3">
-                            <div class="my-3">
-                                <div class="card mb-3" style="">
-                                    <img src="{{thumbnail}}" class="card-img-top" alt="...">
-                                    <div class="card-body text-truncate-container">
-                                        <h5 class="">{{title}}</h5>
-                                        <p class="card-text">{{short_description}}</p>
-                                        <a href="/games/{{_id}}" class="btn btn-primary-card">Details</a>
+                            <div class="col-3 game-results">
+                                <div class="my-3">
+                                    <div class="card mb-3" style="">
+                                        <img src="{{thumbnail}}" class="card-img-top" alt="...">
+                                        <div class="card-body text-truncate-container">
+                                            <h5 class="">{{title}}</h5>
+                                            <p class="card-text">{{short_description}}</p>
+                                            <div class="d-flex gap-2 justify-content-between">
+                                                <a href="/games/{{_id}}" class="btn btn-primary-card">Details</a>
+                                                {{#if this.alreadyAdded}}
+                                                    <form style="width:20%" action="/games/{{_id}}/deleteGameList" method="POST">
+                                                        <button type="submit" style="width:100%" name="deleteGame" class="btn btn-outline-light-card upper">X</button>
+                                                    </form> 
+                                                {{else}}
+                                                    <form style="width:20%" action="/games/{{_id}}/addGameList" method="POST">
+                                                        <button style="width:100%" type="submit" name="addGame" class="btn btn-primary-card upper">+</button>
+                                                    </form>
+                                                {{/if}}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         {{/each}}
                     </div>
                 </div>
@@ -48,18 +92,23 @@
                 <div class="container my-3">
                     <div class="row justify-content-around">
                         {{#each user.yourGames as |yourGame|}}
-                        <div class="col-3">
-                            <div class="my-3">
-                                <div class="card mb-3" style="">
-                                    <img src="{{yourGame.game.thumbnail}}" class="card-img-top" alt="...">
-                                    <div class="card-body text-truncate-container">
-                                        <h5 class="">{{yourGame.game.title}}</h5>
-                                        <p class="card-text">{{yourGame.game.short_description}}</p>
-                                        <a href="/games/{{yourGame.game._id}}" class="btn btn-primary-card">Details</a>
+                            <div class="col-3 game-results">
+                                <div class="my-3">
+                                    <div class="card mb-3" style="">
+                                        <img src="{{yourGame.game.thumbnail}}" class="card-img-top" alt="...">
+                                        <div class="card-body text-truncate-container">
+                                            <h5 class="">{{yourGame.game.title}}</h5>
+                                            <p class="card-text">{{yourGame.game.short_description}}</p>
+                                            <div class="d-flex">
+                                                <a href="/games/{{yourGame.game._id}}" class="btn btn-primary-card">Details</a>
+                                                <form action="/games/{{yourGame.game._id}}/deleteGameList" method="POST">
+                                                    <button type="submit" name="deleteGame" class="btn btn-outline-light-card upper">X</button>
+                                                </form> 
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         {{/each}}
                     </div>
                 </div>

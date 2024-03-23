@@ -12,7 +12,9 @@ const secure = require('../middlewares/auth.middleware');
 const multer = require('multer');
 const upload = multer({ dest: 'public/uploads/'});
 
-router.get('/',  (req, res, next) => res.render('misc/home'));
+// Home
+router.get('/home', users.feed);
+router.get('/', (req, res, next) => res.redirect('/home'));
 
 // User Routes
 router.get('/signup', users.create);
@@ -36,6 +38,8 @@ router.post('/delete/:id', secure.isAuthenticated, users.doDelete);
 // Game Routes
 router.get('/games', secure.isAuthenticated, games.list);
 router.get('/games/:id', secure.isAuthenticated, games.details);  
+router.post('/games/:id/deleteGameList', secure.isAuthenticated, games.deleteGameList);
+router.post('/games/:id/addGameList', secure.isAuthenticated, games.addGameList);
 
 // Channel Routes
 router.get('/games/:id/create-channel', secure.isAuthenticated, channels.create);
