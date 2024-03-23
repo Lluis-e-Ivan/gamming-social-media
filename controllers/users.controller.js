@@ -324,6 +324,17 @@ module.exports.feed = (req, res, next) => {
                         path: 'owner',
                         model: 'User'
                     },
+                }
+            }
+        })
+        .populate({
+            path: 'yourChannels',
+            populate: {
+                path: 'channel',
+                model: 'Channel',
+                populate: {
+                    path: 'yourPosts',
+                    model: 'Post',
                     populate: {
                         path: 'yourComments',
                         model: 'Comment',
@@ -335,7 +346,6 @@ module.exports.feed = (req, res, next) => {
                 }
             }
         })
-        
         .then((user) => {
             const posts = user.yourChannels.flatMap(channel => channel.channel.yourPosts);
             console.log(posts)
