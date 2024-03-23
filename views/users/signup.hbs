@@ -1,47 +1,29 @@
 {{>navbar}}
+<div style="background-color:#262626; padding: 30px; width:30%" class="rounded-2 my-3 position-absolute top-50 start-50 translate-middle justify-content-center">
 
-<div class="container my-3">
-    <h1>Sign up</h1>
+    <div class="container mb-4" style="text-align:center">
+        <h1>Sign up</h1>
+    </div>
+
+    <form class="container" action="/signup" method="POST" enctype="multipart/form-data">
+        <div class="form mb-3">
+            <input type="text" name="username" value="{{user.username}}" class="form-control form-control-lg {{#if errors.username}} is-invalid {{/if}}" id="floatingInput" placeholder="Username">
+            {{#if errors.username}}<div class="invalid-feedback">{{errors.username}}</div>{{/if}}
+        </div>
+        <div class="form mb-3">
+            <input type="email" name="email" value="{{user.email}}" class="form-control form-control-lg {{#if errors.email}} is-invalid {{/if}}" id="floatingInput" placeholder="name@example.com">
+            {{#if errors.email}}<div class="invalid-feedback">{{errors.email}}</div>{{/if}}
+        </div>
+        <div class="form mb-3">
+            <input type="password" name="password" class="form-control form-control-lg {{#if errors.password}} is-invalid {{/if}}" id="floatingPassword" placeholder="Password">
+            {{#if errors.password}}<div class="invalid-feedback">{{errors.password}}</div>{{/if}}
+        </div>
+        <div class="input-group">
+            <label class="input-group-text btn btn-outline-light w-100" style="border-radius: 6px; text-color:#f5f5f5" for="inputGroupFile01"><p style="margin-bottom:0">Upload a profile image</p></label>
+            <input type="file" name="image" value="{{user.image}}" class="form-control invisible" type="file" id="inputGroupFile01" accept="image/*">
+        </div>
+        
+        <button type="submit" class="btn btn-primary w-100 upper mt-4">Create my profile</button>
+
+    </form>
 </div>
-
-<form class="container" action="/signup" method="POST" enctype="multipart/form-data">
-    <div class="row g-3">
-        <div class="col form-floating mb-3">
-            <input type="text" name="name" class="form-control" value="{{user.name}}" id="floatingInput" placeholder="Name" >
-            <label for="floatingInput">Name</label>
-        </div>
-        <div class="col form-floating mb-3">
-            <input type="text" name="lastName" class="form-control" value="{{user.lastName}}" id="floatingInput" placeholder="Last Name">
-            <label for="floatingInput">Last name</label>
-        </div>
-    </div>
-    <div class="form-floating mb-3">
-        <input type="date" class="form-control" value="{{user.birthDate}}" name="birthDate">
-        <label for="floatingInput">Birth date</label>
-    </div>
-    <div class="form-floating mb-3">
-        <input type="number" name="phone" class="form-control" value="{{user.phone}}" id="floatingInput" placeholder="123456789">
-        <label for="floatingInput">Phone number</label>
-    </div>
-    <div class="form-floating mb-3">
-        <input type="text" name="username" value="{{user.username}}" class="form-control {{#if errors.username}} is-invalid {{/if}}" id="floatingInput" placeholder="Username">
-        <label for="floatingInput">Username</label>
-        {{#if errors.username}}<div class="invalid-feedback">{{errors.username}}</div>{{/if}}
-    </div>
-    <div class="form-floating mb-3">
-        <input type="email" name="email" value="{{user.email}}" class="form-control {{#if errors.email}} is-invalid {{/if}}" id="floatingInput" placeholder="name@example.com">
-        <label for="floatingInput">Email address</label>
-        {{#if errors.email}}<div class="invalid-feedback">{{errors.email}}</div>{{/if}}
-    </div>
-    <div class="form-floating mb-3">
-        <input type="password" name="password" class="form-control {{#if errors.password}} is-invalid {{/if}}" id="floatingPassword" placeholder="Password">
-        <label for="floatingPassword">Password</label>
-        {{#if errors.password}}<div class="invalid-feedback">{{errors.password}}</div>{{/if}}
-    </div>
-    <div class="mb-3">
-        <label for="formFile" style="color: white"  class="form-label">Profile's image</label>
-        <input name="image" value="{{user.image}}" class="form-control" type="file" id="formFile">
-    </div>
-    
-    <button type="submit" class="btn btn-primary">Create</button>
-</form>

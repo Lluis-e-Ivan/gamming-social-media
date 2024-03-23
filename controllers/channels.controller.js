@@ -20,11 +20,11 @@ module.exports.doCreate = (req, res, next) => {
 
     Channel.create(channel)
         .then((channel) => {
-            res.redirect('/games/:id/:channel', { channel, game})
+            res.render(`channels/details`, { channel, game })
         })
         .catch((error) => {
             if (error instanceof mongoose.Error.ValidationError) {
-                res.status(400).render('channels/create', { channel: req.body, errors: error.errors });
+                res.status(400).render('channels/create', { channel, errors: error.errors });
             } else {
                 console.error(error);
             }

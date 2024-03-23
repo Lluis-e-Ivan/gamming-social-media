@@ -31,7 +31,7 @@ router.post('/logout', users.logout);
 router.get('/profile', secure.isAuthenticated, users.profile);
 
 router.get('/edit/:id', secure.isAuthenticated, users.edit);
-router.post('/edit/:id', secure.isAuthenticated, users.doEdit);
+router.post('/edit/:id', secure.isAuthenticated, upload.single('image'), users.doEdit);
 
 router.post('/delete/:id', secure.isAuthenticated, users.doDelete);
 

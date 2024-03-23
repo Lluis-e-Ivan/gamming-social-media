@@ -1,19 +1,18 @@
 {{>navbar}}
+<div style="background-color:#262626; padding: 30px; width:30%" class="rounded-2 my-3 position-absolute top-50 start-50 translate-middle justify-content-center">
+    <div class="container mb-4" style="text-align:center">
+        <h1>Log in</h1>
+    </div>
 
-<div class="container my-3">
-    <h1>Log in</h1>
+    <form class="container" action="/login" method="POST">
+        <div class="form mb-3">
+            <input type="text" name="username" value="{{user.username}}" class="form-control form-control-lg {{#if errors.username}} is-invalid {{/if}}" id="floatingInput" placeholder="Username">
+            {{#if errors.username}}<div class="invalid-feedback">{{errors.username}}</div>{{/if}}
+        </div>
+        <div class="form mb-3">
+            <input type="password" name="password" class="form-control form-control-lg {{#if errors.password}} is-invalid {{/if}}" id="floatingPassword" placeholder="Password">
+            {{#if errors.password}}<div class="invalid-feedback">{{errors.password}}</div>{{/if}}
+        </div>
+        <button type="submit" class="btn btn-primary w-100 upper mt-4">Log in</button>
+    </form>
 </div>
-
-<form class="container" action="/login" method="POST">
-    <div class="form-floating mb-3">
-        <input type="text" name="username" value="{{user.username}}" class="form-control {{#if errors.username}} is-invalid {{/if}}" id="floatingInput" placeholder="Username">
-        <label for="floatingInput">Username</label>
-        {{#if errors.username}}<div class="invalid-feedback">{{errors.username}}</div>{{/if}}
-    </div>
-    <div class="form-floating mb-3">
-        <input type="password" name="password" class="form-control {{#if errors.password}} is-invalid {{/if}}" id="floatingPassword" placeholder="Password">
-        <label for="floatingPassword">Password</label>
-        {{#if errors.password}}<div class="invalid-feedback">{{errors.password}}</div>{{/if}}
-    </div>
-    <button type="submit" class="btn btn-primary">Log in</button>
-</form>

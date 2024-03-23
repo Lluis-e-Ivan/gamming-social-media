@@ -163,9 +163,10 @@ module.exports.doEdit = (req, res, next) => {
         lastName: req.body.lastName, 
         username: req.body.username, 
         email: req.body.email, 
-        image: req.body.image,
+        image: req.file ? `/uploads/${req.file.filename}` : '',
         phone: req.body.phone,
-        birthDate: req.body.birthDate
+        birthDate: req.body.birthDate,
+        description: req.body.description
     }
 
     if (req.body.password) {

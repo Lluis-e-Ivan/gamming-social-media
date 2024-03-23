@@ -7,13 +7,12 @@
             <img class="rounded-circle border border-2 object-fit-cover" src="{{currentUser.image}}" alt="Logo" width="200" height="200"/>
         </div>
         <div class="container mx-5 d-flex">
-            <div class="col-11">
+            <div>
                 <h1>{{currentUser.username}}</h1>
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla, natus quod eaque non soluta modi voluptatem, dolorem quos molestias dolorum aut unde reprehenderit voluptate deleniti eum quidem cum odio fugiat?</p>
+                <p class="card-text">{{currentUser.description}}</p>
+                <a class="btn btn-primary upper" style="width: 20%; padding: 10px 0 10px 0" href="/edit/{{currentUser.id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit profile</a>
             </div>
-            <div class="col-2 my-4">
-                <a class="btn btn-outline-primary position-relative top-0 start-50 translate-middle" href="/edit/{{currentUser.id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-            </div>
+            
         </div>
     </div>
     </div>

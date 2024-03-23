@@ -12,7 +12,7 @@ module.exports.doCreate = (req, res, next) => {
             next(createError(404, 'Channel not found'));
         } else {
             const post = {
-                image: req.file ? `/uploads/posts/${req.file.filename}` : '',
+                image: req.file ? `/uploads/${req.file.filename}` : '',
                 text: req.body.text 
             };
             post.owner = req.user.id;

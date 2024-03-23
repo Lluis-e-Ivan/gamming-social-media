@@ -52,12 +52,11 @@
                                 <img width="30" height="30" class="rounded-circle border border-2 object-fit-cover" src="{{currentUser.image}}"/>
                                 <span style="color:#f5f5f5">{{currentUser.username}}</span>
                             </div>
-                            <div class="form-floating">
-                                <textarea name="text" type="text" class="form-control w-100 my-3" placeholder="Leave a comment here..." id="floatingTextarea2" style="height: 100px"></textarea>
-                                <label for="floatingTextarea2">Leave your post content here...</label>
+                            <div class="form">
+                                <textarea name="text" type="text" class="form-control w-100 my-3" placeholder="Leave your post content here..." id="floatingTextarea2" style="height: 100px"></textarea>
                                 <div class="input-group">
                                     <label class="input-group-text btn btn-outline-light w-100" style="border-radius: 6px; text-color:#f5f5f5" for="inputGroupFile01"><p style="margin-bottom:0">Upload an image</p></label>
-                                    <input type="file" name="image" value="{{user.image}}" class="form-control invisible" type="file" id="inputGroupFile01">
+                                    <input type="file" name="image" value="{{user.image}}" accept="image/*" class="form-control invisible" type="file" id="inputGroupFile01">
                                 </div>
                             </div>
                             <div class="modal-footer">

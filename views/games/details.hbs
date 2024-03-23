@@ -84,9 +84,40 @@
         
             <button type="button" style="width: 100%" class="btn btn-outline-light mb-3">See in origin</button>
             <hr>
-            <div class="d-flex justify-content-between my-3 align-items-center">
-                <h5>Your channels</h5>
-                <a type="button" href="/games/{{game._id}}/create-channel" class="btn btn-outline-light-circle"><i class="fa-solid fa-plus"></i></a>
+            <div>
+                <div class="d-flex justify-content-between my-3 align-items-center">
+                    <h5>Your channels</h5>
+                    <a type="button" href="/games/{{game._id}}/create-channel" class="btn btn-outline-light-circle" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-plus"></i></a>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Create a new channel</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="container" action="/games/{{game._id}}/create-channel" method="POST" enctype="multipart/form-data">
+                                <div class="col form mb-3">
+                                    <input type="text" name="name" class="form-control {{#if errors.name}} is-invalid {{/if}}" placeholder="Channel name" >
+                                    {{#if errors.name}}<div class="invalid-feedback">{{errors.name}}</div>{{/if}}
+                                </div>
+                                <div class="col form mb-3">
+                                    <textarea type="text" name="description" class="form-control" value="{{channel.description}}" placeholder="Description" ></textarea>
+                                </div>
+                                <div class="input-group">
+                                    <label class="input-group-text btn btn-outline-light w-100" style="border-radius: 6px; text-color:#f5f5f5" for="formFile"><p style="margin-bottom:0">Upload a cover image</p></label>
+                                    <input type="file" name="image" value="{{user.image}}" accept="image/*" class="form-control invisible" type="file" id="formFile">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary w-100 upper">Create it!</button>
+                                </div>
+                            </form>
+                        </div>
+                        </div>
+                    </div>
             </div>
             {{#each game.yourChannels as |yourChannel|}}
             <div class="list-group my-3 max-elements-feed">

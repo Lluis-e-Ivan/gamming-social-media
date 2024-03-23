@@ -35,6 +35,9 @@ const userSchema = new Schema(
         birthDate: {
             type: Date,
             default: Date.now
+        },
+        description: {
+            type: String,
         }
     },
     { timestamps: true }
