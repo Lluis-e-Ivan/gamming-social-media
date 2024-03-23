@@ -1,7 +1,5 @@
 {{>navbar}}
 
-
-
 <div class="container my-3">
     <div class="card-header d-flex justify-content-between">
         <div class="col-3">
@@ -30,24 +28,109 @@
                     </div>
                     <div class="mt-3">
                         <h5>Filter by genre</h5>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Default checkbox
-                            </label>
+                        <div class="d-flex gap-5">
+                            <div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" name="checkbox" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Shooter
+                                    </label>
+                                </div>
+
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" name="checkbox" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Battle Royale
+                                    </label>
+                                </div>
+                                    
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" name="checkbox" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Strategy
+                                    </label>
+                                </div>
+
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" name="checkbox" id="flexCheckDefault">
+                                    </label><label class="form-check-label" for="flexCheckDefault">
+                                        MMO
+                                    </label>
+                                </div>
+
+                                <div class="form-check mb-2">    
+                                    <input class="form-check-input" type="checkbox" name="checkbox" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        MOBA
+                                    </label>
+                                </div>
+
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" name="checkbox" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        MMORPG
+                                    </label>
+                                </div>
+
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" name="checkbox" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        MMOARPG
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="filters">
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" name="checkbox" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        MMOFPS
+                                    </label>
+                                </div>
+
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" name="checkbox" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Action
+                                    </label>
+                                </div>
+
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" name="checkbox" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Action RPG
+                                    </label>
+                                </div>
+
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" name="checkbox" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Card Game
+                                    </label>
+                                </div>
+
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" name="checkbox" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Racing
+                                    </label>
+                                </div>
+
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" name="checkbox" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Sports
+                                    </label>
+                                </div>
+
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" name="checkbox" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Fighting
+                                    </label>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Default checkbox
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Default checkbox
-                            </label>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -59,7 +142,7 @@
                 <div class="container my-3">
                     <div class="row justify-content-around">
                         {{#each games}}
-                            <div class="col-3 game-results">
+                            <div class="col-3 game-results" data-genre="{{genre}}">
                                 <div class="my-3">
                                     <div class="card mb-3" style="">
                                         <img src="{{thumbnail}}" class="card-img-top" alt="...">

@@ -13,7 +13,7 @@ const multer = require('multer');
 const upload = multer({ dest: 'public/uploads/'});
 
 // Home
-router.get('/home', users.feed);
+router.get('/home', secure.isAuthenticated, users.feed);
 router.get('/', (req, res, next) => res.redirect('/home'));
 
 // User Routes
