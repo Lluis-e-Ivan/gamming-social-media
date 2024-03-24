@@ -59,11 +59,28 @@ label {
     letter-spacing: 0.5px;
     font-weight: 500;
     padding: 10px 0 10px 0;
-    width: 75%;
-    color:#f5f5f5
+    color:#f5f5f5;
+    width: 40px !important;
+    border-radius: 40px;
 }
 
 .btn-primary-card:hover {
+    background-color: #0988ff;
+    color:#f5f5f5;
+}
+
+.btn-primary-post {
+    background-color: #0074e4;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+    padding: 12px 0 12px 0;
+    width: 75%;
+    color:#f5f5f5;
+    border-radius: 10px;
+}
+
+.btn-primary-post:hover {
     background-color: #0988ff;
     color:#f5f5f5;
 }
@@ -105,18 +122,20 @@ label {
 .btn-outline-light-card {
     border-color: #f5f5f5;
     color: #f5f5f5;
-    background-color: #ffffff00;
+    background-color: rgb(33, 33, 33);
     font-size: 12px;
     letter-spacing: 0.5px;
     font-weight: 500;
     padding: 10px 0 10px 0;
-    width: 75%;
+    width: 40px !important;
+    border-radius: 40px;
 }
 
 .btn-outline-light-card:hover {
     border-color: #f5f5f5;
     color: #f5f5f5;
-    background-color: #ffffff39;
+    background-color: rgb(42, 42, 42);
+    
 }
 
 .btn-outline-primary {
@@ -150,8 +169,9 @@ hr {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.card {
-    background-color: #262626;
+.games-list-img {
+    border-radius: 15px;
+    max-width: 330px;
 }
 
 .text-truncate-container p {

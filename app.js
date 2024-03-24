@@ -18,7 +18,7 @@ app.set('views', `${__dirname}/views`);
 
 // Application middlewares
 app.use(express.static(`${__dirname}/public`))
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: false }));
 app.use(logger('dev'));
 
 // Session middlewares

@@ -11,11 +11,14 @@ module.exports.doCreate = (req, res, next) => {
     const channel = { 
         name: req.body.name,
         description: req.body.description,
-        image: req.file ? `/uploads/${req.file.filename}` : '',
         private: req.body.private,
         game: req.params.id
     }
     
+    if(req.file) {
+        patch.image = req.file.path;
+    }
+
     const game = req.params.id;
 
     Channel.create(channel)

@@ -9,8 +9,8 @@ const comments = require('../controllers/comments.controller');
 const news = require('../controllers/news.controller');
 
 const secure = require('../middlewares/auth.middleware');
-const multer = require('multer');
-const upload = multer({ dest: 'public/uploads/'});
+
+const upload = require('./multer.config');
 
 // Home
 router.get('/home', secure.isAuthenticated, users.feed);

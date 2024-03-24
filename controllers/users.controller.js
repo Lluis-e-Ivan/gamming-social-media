@@ -24,10 +24,14 @@ module.exports.doCreate = (req, res, next) => {
                     username: req.body.username, 
                     email: req.body.email, 
                     password: req.body.password,
-                    image: req.file ? `/uploads/${req.file.filename}` : '',
                     phone: req.body.phone,
                     birthDate: req.body.birthDate
                 };
+
+                if(req.file) {
+                    patch.image = req.file.path;
+                }
+
                 User.create(user)
                     .then((user) => {
                         req.session.userId = user.id;
@@ -163,10 +167,13 @@ module.exports.doEdit = (req, res, next) => {
         lastName: req.body.lastName, 
         username: req.body.username, 
         email: req.body.email, 
-        image: req.file ? `/uploads/${req.file.filename}` : '',
         phone: req.body.phone,
         birthDate: req.body.birthDate,
         description: req.body.description
+    }
+
+    if(req.file) {
+        patch.image = req.file.path;
     }
 
     if (req.body.password) {
@@ -306,7 +313,9 @@ module.exports.deleteChannelForm = (req, res, next) => {
 
 module.exports.feed = (req, res, next) => {
 
-    User.findById(req.user.id)
+const user = req.user.id;
+
+    User.findById(user)
         .populate({
             path: 'yourGames', 
             populate: {
@@ -349,7 +358,7 @@ module.exports.feed = (req, res, next) => {
         })
         .then((user) => {
             const posts = user.yourChannels.flatMap(channel => channel.channel.yourPosts);
-            console.log(posts)
+            console.log(user)
             res.render('misc/home', { user, posts })
         })
         .catch(next)
