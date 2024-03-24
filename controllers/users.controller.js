@@ -29,7 +29,7 @@ module.exports.doCreate = (req, res, next) => {
                 };
 
                 if(req.file) {
-                    patch.image = req.file.path;
+                    user.image = req.file.path;
                 }
 
                 User.create(user)

@@ -1,37 +1,46 @@
 {{>navbar}}
 
 <div class="container my-3">
-    <h3>Depending on the games chosen, you may be interested in these channels:</h3>
-    <form action="/profile" method="GET">
-        <div class="container d-flex justify-content-between">
-            <button type="submit" class="btn btn-primary">Finish</button>
+    <div class="d-flex justify-content-between">
+        <div class="col-6">
+            <input class="form-control bg-search rounded-pill" placeholder="Search" style="padding-left:30px" id="searchInput" type="text">
         </div>
-    </form>
-    <div class="my-3">
-    {{#each channels as |channel|}}
-    <div class="card mb-3">
-        <div class="row g-0">
-            <div class="col-md-4">
-                <img src="{{channel.image}}" class="img-fluid rounded-start" style="width: 300px" alt="...">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h5 class="">{{channel.name}}</h5>
-                    <p class=""><small class="">{{channel.game.title}}</small></p>
-                    <p class="">{{channel.description}}</p>
-                    {{#if this.alreadyAdded}}
-                        <form action="/channels/{{_id}}/deleteChannelForm" method="POST">
-                            <button type="submit" style="width: 20%" name="deleteChannel" class="btn btn-outline-light upper">Delete from your channels</button>
-                        </form> 
-                    {{else}}
-                        <form action="/channels/{{_id}}/addChannelForm" method="POST">
-                            <button type="submit" style="width: 30%" name="addChannel" class="btn btn-primary upper">Add to your channels</button>
-                        </form>
-                    {{/if}}
-                </div>
-            </div>
+        <div class="col-3 d-flex justify-content-end">
+            <form action="/profile" method="GET" style="width:50%">
+                <button type="submit" class="btn btn-primary w-100 upper">Finish</button>
+            </form>
         </div>
     </div>
-    {{/each}}
+    
+    <div class="my-3">
+        <div class="row justify-content-around">
+            {{#each channels as |channel|}}
+                <div class="col-5 game-results mb-4">
+                    <div class="my-3">
+                        <div class="mb-3">
+                            <div>
+                                <a class="object-fit-cover position-relative img__wrap" >
+                                    <img id="preview" src="{{channel.image}}"  class="games-list-img object-fit-cover img__img" alt="...">
+                                    {{#if this.alreadyAdded}}
+                                        <form action="/channels/{{_id}}/deleteChannelForm" method="POST">
+                                            <button type="submit" name="deleteGame" class="add-delete-btn btn btn-outline-light-card position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle p-2" data-bs-toggle="tooltip" data-bs-title="Delete from your games" data-bs-placement="bottom"><i class="fa-solid fa-xmark"></i></button>
+                                        </form> 
+                                    {{else}}
+                                        <form action="/channels/{{_id}}/addChannelForm" method="POST">
+                                            <button type="submit" name="addGame" class=" add-delete-btn btn btn-primary-card position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle p-2" data-bs-toggle="tooltip" data-bs-title="Add to you games" data-bs-placement="bottom"><i class="fa-solid fa-plus"></i></button>
+                                        </form>
+                                    {{/if}}
+                                </a>
+                            </div>
+                            <div class="text-truncate-container" style="padding-right:10%">
+                                <h5 class="mt-3">{{channel.name}}</h5>
+                                <p><small>{{channel.game.title}}</small></p>
+                                <p class="text-card">{{channel.description}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
     </div>
 </div>
