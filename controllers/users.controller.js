@@ -18,7 +18,7 @@ module.exports.doCreate = (req, res, next) => {
             if (user) {
                 res.status(409).render('users/signup', { user: req.body, errors: { username: 'Already exists'} });
             } else {
-                const userCreate = { 
+                const user = { 
                     name: req.body.name, 
                     lastName: req.body.lastName, 
                     username: req.body.username, 
@@ -29,17 +29,13 @@ module.exports.doCreate = (req, res, next) => {
                 };
 
                 if(req.file) {
-                    userCreate.image = req.file.path;
+                    user.image = req.file.path;
                 }
 
-                User.create(userCreate)
-                    .then((userCreate) => {
-                        const user = req.user.id;
-                         User.findById(user)
-                            .then((user) => {
-                                req.session.userId = user.id;
-                                res.redirect('/signup-games');
-                            }) 
+                User.create(user)
+                    .then((user) => {
+                        req.session.userId = user.id;
+                        res.redirect('/signup-games');
                     })
                     .catch((error) => {
                         if (error instanceof mongoose.Error.ValidationError) {
@@ -73,7 +69,12 @@ module.exports.fillGames = (req, res, next) => {
                             game.alreadyAdded = userGameId.includes(game._id.toString());
                             return game;
                         })
-                        res.render('users/formGames', { games: finalGames });
+                        const user = req.user.id;
+                        return User.findById(user)
+                            .then((user) => {
+                                res.render('users/formGames', { games: finalGames, user});
+                            })
+                        
                     })
                     .catch(next)
             }
@@ -103,7 +104,12 @@ module.exports.fillChannels = (req, res, next) => {
                         channel.alreadyAdded = userChannelId.includes(channel._id.toString());
                         return channel;
                     })
-                    res.render('users/formChannels', { channels: finalChannels });
+                    const user = req.user.id;
+                    return User.findById(user)
+                        .then((user) => {
+                            res.render('users/formChannels', { channels: finalChannels, user});
+                        })
+                    
                 })
         })
         .catch(next)
@@ -377,18 +383,19 @@ const user = req.user.id;
         })
         .then((user) => {
             const posts = user.yourChannels.flatMap(channel => channel.channel.yourPosts);
+            
             posts.sort(function (a, b) {
                 // A va primero que B
-                if (a.createdAt < b.createdAt)
+                if (a._id > b._id)
                     return -1;
                 // B va primero que A
-                else if (a.createdAt > b.createdAt)
+                else if (a._id < b._id)
                     return 1;
                 // A y B son iguales
                 else 
                     return 0;
             });
-            console.log(posts);
+            console.log(posts)
             res.render('misc/home', { user, posts, currentUser: req.user.id })
         })
         .catch(next)

@@ -44,7 +44,7 @@ router.post('/games/:id/addGameList', secure.isAuthenticated, games.addGameList)
 // Channel Routes
 router.get('/channels', secure.isAuthenticated, channels.list);
 router.get('/games/:id/create-channel', secure.isAuthenticated, channels.create);
-router.post('/games/:id/create-channel', secure.isAuthenticated, upload.single('image'), channels.doCreate);
+router.post('/games/:id', secure.isAuthenticated, upload.single('image'), channels.doCreate);
 router.get('/channels/:id', secure.isAuthenticated, channels.details);
 router.post('/channels/:id/deleteChannelList', secure.isAuthenticated, channels.deleteChannelList);
 router.post('/channels/:id/addChannelList', secure.isAuthenticated, channels.addChannelList);
@@ -64,6 +64,9 @@ router.post('/channels/:id/post', secure.isAuthenticated, upload.single('image')
 
 // Comment Routes
 router.post('/posts/:postId/comments', secure.isAuthenticated, comments.doCreate);
+router.post('/home/:postId', secure.isAuthenticated, comments.doCreateHome);
+
+
 
 // News Routes
 router.get('/news', news.list);

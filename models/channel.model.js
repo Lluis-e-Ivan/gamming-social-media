@@ -21,10 +21,6 @@ const channelSchema = new Schema(
         publications: {
             type: String
         },
-        private: {
-            type: Boolean,
-            default: false
-        },
         game: {
             type: mongoose.Types.ObjectId,
             ref: 'Game'

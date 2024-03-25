@@ -48,8 +48,8 @@ module.exports.doCreate = (req, res, next) => {
         game: req.params.id
     }
     
-    if(req.file) {
-        patch.image = req.file.path;
+    if (req.file) {
+        channel.image = req.file.path;
     }
 
     const game = req.params.id;
@@ -59,8 +59,9 @@ module.exports.doCreate = (req, res, next) => {
             res.render(`channels/details`, { channel, game })
         })
         .catch((error) => {
+            console.log(game)
             if (error instanceof mongoose.Error.ValidationError) {
-                res.status(400).render(`game/${req.params.id}`, { errors: error.errors });
+                res.render('games/details' , { channel, errors: error.errors, game });
             } else {
                 console.error(error);
             }
@@ -100,6 +101,20 @@ module.exports.details = (req, res, next) => {
             if(!channel) {
                 next(createError(404, 'Channel not found'));
             } else {
+                const posts = channel.yourPosts;
+                posts.sort(function (a, b) {
+                    // A va primero que B
+                    if (a._id > b._id)
+                        return -1;
+                    // B va primero que A
+                    else if (a._id < b._id)
+                        return 1;
+                    // A y B son iguales
+                    else 
+                        return 0;
+                });
+               
+                
                 return User.findById(user)
                 .then((user) => {
                     return UserChannel.findOne({
@@ -109,8 +124,12 @@ module.exports.details = (req, res, next) => {
                     .then(userchannel => {
                         UserChannel.countDocuments({ channel })
                             .then((count) => {
-                                res.render('channels/details', { channel, userchannel, user, count });
+                                console.log(posts)
+                                res.render('channels/details', { channel, userchannel, user, count, posts });
+                                
+                                
                             })
+                            
                             
                     });
                             

@@ -12,13 +12,10 @@ module.exports.doCreate = (req, res, next) => {
         if (!channel) {
             next(createError(404, 'Channel not found'));
         } else {
-            
-            const post = {
-                text: req.body.text 
-            };
+            const post = { text: req.body.text };
 
             if(req.file) {
-                patch.image = req.file.path;
+                post.image = req.file.path;
             }
 
             post.owner = req.user.id;
@@ -30,10 +27,10 @@ module.exports.doCreate = (req, res, next) => {
 
             return Post.create(post)
                 .then(() =>{
-                    console.log(req.file)
                     res.redirect(`/channels/${id}`)})
                 .catch(next);
         };
     })
     .catch(next);
 };
+

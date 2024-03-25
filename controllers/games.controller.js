@@ -53,7 +53,12 @@ module.exports.details = (req, res, next) => {
                     game: game._id
                 })
                     .then(usergame => {
-                        res.render('games/details', { game, usergame });
+                        const user = req.user.id;
+                        return User.findById(user)
+                            .then((user) => {
+                                res.render('games/details', { game, usergame, user });
+                            })
+                        
                     })
             }
         })

@@ -5,24 +5,25 @@
     <div class="row justify-content-between">
         <div class="col-9">
             <div class="my-3">
-                <div id="carouselExampleIndicators" class="carousel slide">
+                <div id="carouselExampleDark" class="carousel carousel-dark slide">
                     <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                      </div>
-                    <div class="carousel-inner rounded-4">
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
                         {{#each game.screenshots as |carrousel|}}
-                            <div class="carousel-item active">
+                            <div class="carousel-item active" data-bs-interval="2000">
                                 <img src="{{carrousel.image}}" class="d-block w-100" alt="...">
                             </div>
                         {{/each}}
+    
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
@@ -99,7 +100,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form class="container" action="/games/{{game._id}}/create-channel" method="POST" enctype="multipart/form-data">
+                            <form class="container" action="/games/{{game._id}}" method="POST" enctype="multipart/form-data">
                                 <div class="col form mb-3">
                                     <input type="text" name="name" class="form-control {{#if errors.name}} is-invalid {{/if}}" placeholder="Channel name" >
                                     {{#if errors.name}}<div class="invalid-feedback">{{errors.name}}</div>{{/if}}
