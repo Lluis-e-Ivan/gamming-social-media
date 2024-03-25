@@ -10,7 +10,7 @@
             <div class="d-flex">
                 <div class="col-8">
                     <h1>{{channel.name}}</h1>
-                    <p>32k followers</p>
+                    <p class="badge rounded-pill text-bg-primary">{{count}} followers</p>
                 </div>
 
                 {{#if userchannel}}
@@ -34,9 +34,12 @@
             
             <div>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Create a post!
-            </button>
+            <div class="bottom-line">
+                <button type="button" class="btn btn-primary w-100  mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Create a post!
+                </button>  
+            </div>
+            
 
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

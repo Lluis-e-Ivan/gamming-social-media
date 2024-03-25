@@ -42,10 +42,12 @@ router.post('/games/:id/deleteGameList', secure.isAuthenticated, games.deleteGam
 router.post('/games/:id/addGameList', secure.isAuthenticated, games.addGameList);
 
 // Channel Routes
+router.get('/channels', secure.isAuthenticated, channels.list);
 router.get('/games/:id/create-channel', secure.isAuthenticated, channels.create);
 router.post('/games/:id/create-channel', secure.isAuthenticated, upload.single('image'), channels.doCreate);
 router.get('/channels/:id', secure.isAuthenticated, channels.details);
-router.get('/channels', secure.isAuthenticated, channels.list);
+router.post('/channels/:id/deleteChannelList', secure.isAuthenticated, channels.deleteChannelList);
+router.post('/channels/:id/addChannelList', secure.isAuthenticated, channels.addChannelList);
 
 // Relations Routes
 router.post('/games/:id/delete', secure.isAuthenticated, users.deleteGame);

@@ -9,7 +9,10 @@
                 <div class="w-100">
                     <div class="d-flex align-items-center gap-2 mb-3">
                         <img width="35" height="35" class="rounded-circle border border-2 object-fit-cover" src="{{yourPost.owner.image}}"/>
-                        <span class="" style="color:#f5f5f5">{{yourPost.owner.username}}<p class="text-card" style="font-size: 12px; margin: 0;">{{yourPost.channel.name}}</p></span>
+                        <div class="row">
+                            <span class="" style="color:#f5f5f5">{{yourPost.owner.username}}</span>
+                            <a href="/channels/{{yourPost.channel.id}}" type="button" class="text-card" style="font-size: 12px; margin: 0; ">{{yourPost.channel.name}}</a>
+                        </div>
                     </div>
                     <div class="bottom-line">
                         <p>{{yourPost.text}}</p>
@@ -72,7 +75,7 @@
         <div class="my-4">
         <div class="d-flex justify-content-between my-3 align-items-center">
             <h5>Your channels</h5>
-            <button class="btn btn-outline-light">See more</button>
+            <a href="/channels" class="btn btn-outline-light">See more</a>
         </div>
         {{#each user.yourChannels as |yourChannel|}}
         <div class="list-group my-3 max-elements-feed">

@@ -15,7 +15,8 @@ const channelSchema = new Schema(
             type: String
         },
         image: {
-            type: String
+            type: String,
+            required: [true, 'Channel image is required'],
         },
         publications: {
             type: String

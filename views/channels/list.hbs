@@ -1,5 +1,91 @@
 {{>navbar}}
 
 <div class="container my-3">
-    hola
+    <div class="card-header d-flex justify-content-between">
+        <div class="col-3">
+            <ul class="nav nav-underline">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" style="color:white" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">All channels</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" style="color:white" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Your channels</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-6">
+            <input class="form-control bg-search rounded-pill" placeholder="Search" style="padding-left:30px" id="searchInput" type="text">
+        </div>
+    </div>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+            <div class="card-body">
+                <div class="container my-5">
+                    <div class="row justify-content-around">
+                        {{#each channels as |channel|}}
+                            <div class="col-4 game-results mb-4" data-genre="{{genre}}">
+                                <div class="my-3">
+                                    <div class="mb-3">
+                                        <div>
+                                            <a href="/games/{{_id}}" class="object-fit-cover position-relative img__wrap" type="button">
+                                                <img id="preview" src="{{channel.image}}"  class="games-list-img object-fit-cover img__img" alt="...">
+                                                <div class="img__hover_layer">
+                                                    <label class="input-group-text" for="inputGroupFile01" style="border: 0px;" type="button"><p class="img__description position-absolute top-50 start-50 translate-middle" ></p></label>
+                                                    <input type="file" name="image" value="{{currentUser.image}}" class="form-control invisible" type="file" id="inputGroupFile01" accept="image/*">
+                                                </div>
+                                                {{#if this.alreadyAdded}}
+                                                    <form action="/channels/{{_id}}/deleteChannelList" method="POST">
+                                                        <button type="submit" name="deleteGame" class="add-delete-btn btn btn-outline-light-card position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle p-2" data-bs-toggle="tooltip" data-bs-title="Delete from your games" data-bs-placement="bottom"><i class="fa-solid fa-xmark"></i></button>
+                                                    </form> 
+                                                {{else}}
+                                                    <form action="/channels/{{_id}}/addChannelList" method="POST">
+                                                        <button type="submit" name="addGame" class=" add-delete-btn btn btn-primary-card position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle p-2" data-bs-toggle="tooltip" data-bs-title="Add to you games" data-bs-placement="bottom"><i class="fa-solid fa-plus"></i></button>
+                                                    </form>
+                                                {{/if}}
+                                            </a>
+                                        </div>
+                                        <div class="text-truncate-container" style="padding-right:10%">
+                                            <h5 class="mt-3">{{channel.name}}</h5>
+                                            <p class="text-card">{{channel.description}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+            <div class="card-body">
+                <div class="container my-3">
+                    <div class="row justify-content-around">
+                        {{#each user.yourChannels as |yourChannel|}}
+                            <div class="col-4 game-results mb-4" data-genre="{{genre}}">
+                                <div class="my-3">
+                                    <div class="mb-3">
+                                        <div>
+                                            <a href="/games/{{yourGame.game._id}}" class="object-fit-cover position-relative img__wrap" type="button">
+                                                <img id="preview" src="{{yourChannel.channel.image}}"  class="games-list-img object-fit-cover img__img" alt="...">
+                                                <div class="img__hover_layer">
+                                                    <label class="input-group-text" for="inputGroupFile01" style="border: 0px;" type="button"><p class="img__description position-absolute top-50 start-50 translate-middle" ></p></label>
+                                                    <input type="file" name="image" value="{{currentUser.image}}" class="form-control invisible" type="file" id="inputGroupFile01" accept="image/*">
+                                                </div>
+                                                <form action="/channels/{{yourChannel.channel._id}}/deleteChannelList" method="POST">
+                                                    <button type="submit" name="deleteGame" class="add-delete-btn btn btn-outline-light-card position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle p-2" data-bs-toggle="tooltip" data-bs-title="Delete from your games" data-bs-placement="bottom"><i class="fa-solid fa-xmark"></i></button>
+                                                </form> 
+                                            </a>
+                                        </div>
+                                        <div class="text-truncate-container" style="padding-right:10%">
+                                            <h5 class="mt-3">{{yourChannel.channel.name}}</h5>
+                                            <p class="text-card">{{yourChannel.channel.description}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

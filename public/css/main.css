@@ -408,3 +408,7 @@ input:-webkit-autofill:active{
 .text-card {
     color: #f5f5f599
 }
+
+a {
+    text-decoration: none;
+}

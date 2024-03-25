@@ -18,7 +18,7 @@ module.exports.doCreate = (req, res, next) => {
             if (user) {
                 res.status(409).render('users/signup', { user: req.body, errors: { username: 'Already exists'} });
             } else {
-                const user = { 
+                const userCreate = { 
                     name: req.body.name, 
                     lastName: req.body.lastName, 
                     username: req.body.username, 
@@ -29,13 +29,17 @@ module.exports.doCreate = (req, res, next) => {
                 };
 
                 if(req.file) {
-                    user.image = req.file.path;
+                    userCreate.image = req.file.path;
                 }
 
-                User.create(user)
-                    .then((user) => {
-                        req.session.userId = user.id;
-                        res.redirect('/signup-games');
+                User.create(userCreate)
+                    .then((userCreate) => {
+                        const user = req.user.id;
+                         User.findById(user)
+                            .then((user) => {
+                                req.session.userId = user.id;
+                                res.redirect('/signup-games');
+                            }) 
                     })
                     .catch((error) => {
                         if (error instanceof mongoose.Error.ValidationError) {
@@ -373,8 +377,18 @@ const user = req.user.id;
         })
         .then((user) => {
             const posts = user.yourChannels.flatMap(channel => channel.channel.yourPosts);
-            console.log(user)
-            console.log(posts)
+            posts.sort(function (a, b) {
+                // A va primero que B
+                if (a.createdAt < b.createdAt)
+                    return -1;
+                // B va primero que A
+                else if (a.createdAt > b.createdAt)
+                    return 1;
+                // A y B son iguales
+                else 
+                    return 0;
+            });
+            console.log(posts);
             res.render('misc/home', { user, posts, currentUser: req.user.id })
         })
         .catch(next)
