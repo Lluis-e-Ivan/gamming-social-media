@@ -13,15 +13,18 @@
             <li class="nav-item-navbar" data-bs-toggle="tooltip" data-bs-title="Games" data-bs-placement="bottom">
               <a class="nav-link" aria-current="page" href="/games"><i class="fa-solid fa-gamepad"></i></a>
             </li>
+            <li class="nav-item-navbar" data-bs-toggle="tooltip" data-bs-title="Channels" data-bs-placement="bottom">
+              <a class="nav-link" aria-current="page" href="/channels"><i class="fa-solid fa-users"></i></a>
+            </li>
             <li class="nav-item-navbar" data-bs-toggle="tooltip" data-bs-title="News" data-bs-placement="bottom">
               <a class="nav-link" aria-current="page" href="/news"><i class="fa-solid fa-newspaper"></i></a>
             </li>
         </ul>
     </div>
-    {{#if currentUser}}
+    {{#if user}}
     <div class="dropdown d-flex align-items-center gap-2 rounded-pill user-navbar" type="button">
-        <span style="color:#f5f5f5" data-bs-toggle="dropdown">{{currentUser.username}}</span>
-        <img class="rounded-circle object-fit-cover" data-bs-toggle="dropdown" src="{{currentUser.image}}" alt="Logo" width="45" height="45"/>
+        <span style="color:#f5f5f5" data-bs-toggle="dropdown">{{user.username}}</span>
+        <img class="rounded-circle object-fit-cover" data-bs-toggle="dropdown" src="{{user.image}}" alt="Logo" width="45" height="45"/>
      
       <ul class="dropdown-menu dropdown-menu-dark">
         <li>

@@ -45,6 +45,7 @@ router.post('/games/:id/addGameList', secure.isAuthenticated, games.addGameList)
 router.get('/games/:id/create-channel', secure.isAuthenticated, channels.create);
 router.post('/games/:id/create-channel', secure.isAuthenticated, upload.single('image'), channels.doCreate);
 router.get('/channels/:id', secure.isAuthenticated, channels.details);
+router.get('/channels', secure.isAuthenticated, channels.list);
 
 // Relations Routes
 router.post('/games/:id/delete', secure.isAuthenticated, users.deleteGame);
@@ -64,5 +65,6 @@ router.post('/posts/:postId/comments', secure.isAuthenticated, comments.doCreate
 
 // News Routes
 router.get('/news', news.list);
+router.get('/news/:id', news.details);
 
 module.exports = router;

@@ -7,9 +7,9 @@
             {{#each posts as |yourPost|}}
             <div class="d-flex gap-3 rounded-2 my-3" style="background-color:#262626; padding: 30px" id="{{yourPost.id}}">
                 <div class="w-100">
-                    <div class="d-flex align-items-center gap-2 mb-2">
+                    <div class="d-flex align-items-center gap-2 mb-3">
                         <img width="35" height="35" class="rounded-circle border border-2 object-fit-cover" src="{{yourPost.owner.image}}"/>
-                        <span style="color:#f5f5f5">{{yourPost.owner.username}}</span>
+                        <span class="" style="color:#f5f5f5">{{yourPost.owner.username}}<p class="text-card" style="font-size: 12px; margin: 0;">{{yourPost.channel.name}}</p></span>
                     </div>
                     <div class="bottom-line">
                         <p>{{yourPost.text}}</p>
@@ -22,11 +22,10 @@
                     </div>
                     <div class="collapse mb-3" id="collapseExample">
                         <div>
+                            
                             <form class="d-flex justify-content-between gap-1" action="/posts/{{yourPost.id}}/comments" method="POST" class="d-flex gap-2">
                                 <div class="col-1">
-                                    
-                                    <img width="45px" height="45px" class="rounded-circle border border-2 object-fit-cover" src="{{currentUser.image}}"/>
-                                    
+                                    <img width="45px" height="45px" class="rounded-circle border border-2 object-fit-cover" src="{{../user.image}}"/>
                                 </div>
                                 <div class="form col-9">
                                     <input class="form-control form-control-lg" name="text" style="background-color:#3a3a3a !important;" placeholder="Leave a comment here" id="floatingTextarea"></input>

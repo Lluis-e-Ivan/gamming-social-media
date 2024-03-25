@@ -4,6 +4,10 @@ const Channel = require('../models/channel.model');
 const Game = require('../models/game.model');
 const Post = require('../models/post.model');
 const UserChannel = require('../models/user-channel.model');
+const User = require('../models/user.model');
+const { sessions } = require('../middlewares/auth.middleware');
+
+module.exports.list = (req, res, next) => { res.render ('channels/list')}
 
 module.exports.create = (req, res, next) => res.render('channels/create', { game: { _id: req.params.id }});
 
@@ -36,8 +40,15 @@ module.exports.doCreate = (req, res, next) => {
 
 module.exports.details = (req, res, next) => {
     const { id } = req.params;
+    const user = req.user.id;
     
     Channel.findById(id)
+        .populate({
+            path: 'yourPosts', 
+            populate: {
+                path: 'channel',
+            },
+        })
         .populate({
             path: 'yourPosts', 
             populate: {
@@ -60,13 +71,16 @@ module.exports.details = (req, res, next) => {
             if(!channel) {
                 next(createError(404, 'Channel not found'));
             } else {
-                return UserChannel.findOne({
-                    user: req.user.id,
-                    channel: channel.id
-                })
-                    .then(userchannel => {
-                        res.render('channels/details', { channel, userchannel });
+                return User.findById(user)
+                .then((user) => {
+                    return UserChannel.findOne({
+                        user,
+                        channel: channel.id
                     })
+                        .then(userchannel => {
+                            res.render('channels/details', { channel, userchannel, user });
+                        })
+                })
             }
         })
         .catch(next);

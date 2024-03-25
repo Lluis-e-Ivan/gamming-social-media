@@ -316,6 +316,7 @@ module.exports.feed = (req, res, next) => {
 const user = req.user.id;
 
     User.findById(user)
+        
         .populate({
             path: 'yourGames', 
             populate: {
@@ -356,10 +357,25 @@ const user = req.user.id;
                 }
             }
         })
+        .populate({
+            path: 'yourChannels',
+            populate: {
+                path: 'channel',
+                model: 'Channel',
+                populate: {
+                    path: 'yourPosts',
+                    model: 'Post',
+                    populate: {
+                        path: 'channel',
+                    }
+                }
+            }
+        })
         .then((user) => {
             const posts = user.yourChannels.flatMap(channel => channel.channel.yourPosts);
             console.log(user)
-            res.render('misc/home', { user, posts })
+            console.log(posts)
+            res.render('misc/home', { user, posts, currentUser: req.user.id })
         })
         .catch(next)
 };

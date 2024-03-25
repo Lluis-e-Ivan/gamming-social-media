@@ -152,14 +152,14 @@
                                                     <input type="file" name="image" value="{{currentUser.image}}" class="form-control invisible" type="file" id="inputGroupFile01" accept="image/*">
                                                 </div>
                                                 {{#if this.alreadyAdded}}
-                                                <form action="/games/{{_id}}/deleteGameList" method="POST">
-                                                    <button type="submit" name="deleteGame" class="add-delete-btn btn btn-outline-light-card position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle p-2" data-bs-toggle="tooltip" data-bs-title="Delete from your games" data-bs-placement="bottom"><i class="fa-solid fa-xmark"></i></button>
-                                                </form> 
-                                            {{else}}
-                                                <form action="/games/{{_id}}/addGameList" method="POST">
-                                                    <button type="submit" name="addGame" class=" add-delete-btn btn btn-primary-card position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle p-2" data-bs-toggle="tooltip" data-bs-title="Add to you games" data-bs-placement="bottom"><i class="fa-solid fa-plus"></i></button>
-                                                </form>
-                                            {{/if}}
+                                                    <form action="/games/{{_id}}/deleteGameList" method="POST">
+                                                        <button type="submit" name="deleteGame" class="add-delete-btn btn btn-outline-light-card position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle p-2" data-bs-toggle="tooltip" data-bs-title="Delete from your games" data-bs-placement="bottom"><i class="fa-solid fa-xmark"></i></button>
+                                                    </form> 
+                                                {{else}}
+                                                    <form action="/games/{{_id}}/addGameList" method="POST">
+                                                        <button type="submit" name="addGame" class=" add-delete-btn btn btn-primary-card position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle p-2" data-bs-toggle="tooltip" data-bs-title="Add to you games" data-bs-placement="bottom"><i class="fa-solid fa-plus"></i></button>
+                                                    </form>
+                                                {{/if}}
                                             </a>
                                         </div>
                                         <div class="text-truncate-container" style="padding-right:10%">

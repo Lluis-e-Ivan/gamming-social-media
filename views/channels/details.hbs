@@ -87,19 +87,16 @@
                         <div class="collapse mb-3" id="collapseExample">
                             <div>
                                 <form class="d-flex justify-content-between gap-1" action="/posts/{{yourPost.id}}/comments" method="POST" class="d-flex gap-2">
-                                    <div class="d-flex col-8 align-items-center gap-3"> 
-                                        <div class="col-1">
-                                            <img width="45" height="45" class="rounded-circle border border-2 object-fit-cover" src="{{currentUser.image}}"/>
-                                        </div>
-                                        <div class="form-floating col-11">
-                                            <textarea class="form-control" name="text" style="background-color:#3a3a3a !important;" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-                                            <label for="floatingTextarea">Write here your comment...</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-3 position-relative">
-                                        <button class="btn btn-primary position-absolute end-0" style="width:90%" type="submit"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
-                                    </div>
-                                </form>
+                                <div class="col-1">
+                                    <img width="45px" height="45px" class="rounded-circle border border-2 object-fit-cover" src="{{../user.image}}"/>
+                                </div>
+                                <div class="form col-9">
+                                    <input class="form-control form-control-lg" name="text" style="background-color:#3a3a3a !important;" placeholder="Leave a comment here" id="floatingTextarea"></input>
+                                </div>
+                                <div class="col-2 position-relative">
+                                    <button class="btn btn-primary-post " style="width:90%" type="submit"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                                </div>
+                            </form>
                             </div>
                         </div>
                         
