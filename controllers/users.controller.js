@@ -18,28 +18,24 @@ module.exports.doCreate = (req, res, next) => {
             if (user) {
                 res.status(409).render('users/signup', { user: req.body, errors: { username: 'Already exists'} });
             } else {
-                const user = { 
-                    name: req.body.name, 
-                    lastName: req.body.lastName, 
+                const userToCreate = { 
                     username: req.body.username, 
                     email: req.body.email, 
                     password: req.body.password,
-                    phone: req.body.phone,
-                    birthDate: req.body.birthDate
                 };
 
                 if(req.file) {
-                    user.image = req.file.path;
+                    userToCreate.image = req.file.path;
                 }
-
-                User.create(user)
-                    .then((user) => {
-                        req.session.userId = user.id;
+                
+                User.create(userToCreate)
+                    .then((userToCreate) => {
+                        req.session.userId = userToCreate.id;
                         res.redirect('/signup-games');
                     })
                     .catch((error) => {
                         if (error instanceof mongoose.Error.ValidationError) {
-                            res.status(400).render('users/signup', { user: req.body, errors: error.errors });
+                            res.status(400).render('users/signup', { userToCreate: req.body, errors: error.errors });
                         } else {
                             console.error(error);
                         }
@@ -47,6 +43,8 @@ module.exports.doCreate = (req, res, next) => {
             };
         })
         .catch((error) => {
+
+
             if (error instanceof mongoose.Error.ValidationError) {
                 res.status(400).render('users/signup', { user: req.body, errors: error.errors });
             } else {

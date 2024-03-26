@@ -294,7 +294,7 @@ hr {
 ::-webkit-scrollbar {
     height: 12px;
     width: 14px;
-    background: #1a1a1a;
+    background: #101014;
     z-index: 12;
     overflow: visible;
 }
@@ -314,7 +314,6 @@ hr {
 
 ::-webkit-scrollbar-corner {
     background: #202020;
-    
 }
 
 input:-webkit-autofill,

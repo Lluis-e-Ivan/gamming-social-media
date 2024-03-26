@@ -45,7 +45,7 @@
             <div class="list-group my-3 mx-3 max-elements">
                 <a href="/channels/{{yourChannel.channel.id}}" class="list-group-item list-group-item-dark" aria-current="true">
                 <div class="d-flex w-100 justify-content-left gap-3">
-                    <img style="max-width: 100px" src="{{yourChannel.channel.image}}"/>
+                    <img style="width:100px; height: 68px" class="object-fit-cover" src="{{yourChannel.channel.image}}"/>
                     <div class="text-truncate-container">
                         <h5 class="mb-1">{{yourChannel.channel.name}}</h5>
                         <p>{{yourChannel.channel.game.title}}</p>
@@ -58,7 +58,7 @@
     </div>
 </div>
 
-
+{{>footer}}
 
 
 

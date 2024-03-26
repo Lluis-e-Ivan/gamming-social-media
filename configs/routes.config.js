@@ -44,16 +44,16 @@ router.post('/games/:id/addGameList', secure.isAuthenticated, games.addGameList)
 // Channel Routes
 router.get('/channels', secure.isAuthenticated, channels.list);
 router.get('/games/:id/create-channel', secure.isAuthenticated, channels.create);
-router.post('/games/:id', secure.isAuthenticated, upload.single('image'), channels.doCreate);
+router.post('/games/:id/create-channel', secure.isAuthenticated, upload.single('image'), channels.doCreate);
 router.get('/channels/:id', secure.isAuthenticated, channels.details);
 router.post('/channels/:id/deleteChannelList', secure.isAuthenticated, channels.deleteChannelList);
 router.post('/channels/:id/addChannelList', secure.isAuthenticated, channels.addChannelList);
 
 // Relations Routes
+router.post('/games/:id', secure.isAuthenticated, users.addGame);
 router.post('/games/:id/delete', secure.isAuthenticated, users.deleteGame);
 router.post('/games/:id/addGameForm', users.addGameForm);
 router.post('/games/:id/deleteGameForm', users.deleteGameForm);
-router.post('/games/:id', secure.isAuthenticated, users.addGame);
 router.post('/channels/:id/delete', secure.isAuthenticated, users.deleteChannel);
 router.post('/channels/:id', secure.isAuthenticated, users.addChannel);
 router.post('/channels/:id/addChannelForm', secure.isAuthenticated, users.addChannelForm);

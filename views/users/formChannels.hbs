@@ -19,9 +19,9 @@
                 <div class="col-5 game-results mb-4">
                     <div class="my-3">
                         <div class="mb-3">
-                            <div>
-                                <a class="object-fit-cover position-relative img__wrap" >
-                                    <img id="preview" src="{{channel.image}}"  class="games-list-img object-fit-cover img__img" alt="...">
+                            <div style="width:465px; height: 306px">
+                                <a style="width:465px; height: 306px" class="object-fit-cover position-relative img__wrap" >
+                                    <img id="preview" src="{{channel.image}}" style="width:465px; height: 306px" class="games-list-img object-fit-cover img__img" alt="...">
                                     {{#if this.alreadyAdded}}
                                         <form action="/channels/{{_id}}/deleteChannelForm" method="POST">
                                             <button type="submit" name="deleteGame" class="add-delete-btn btn btn-outline-light-card position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle p-2" data-bs-toggle="tooltip" data-bs-title="Delete from your games" data-bs-placement="bottom"><i class="fa-solid fa-xmark"></i></button>
@@ -45,3 +45,5 @@
         </div>
     </div>
 </div>
+
+{{>footer}}

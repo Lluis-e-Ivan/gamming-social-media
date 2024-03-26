@@ -56,7 +56,11 @@ module.exports.doCreate = (req, res, next) => {
 
     Channel.create(channel)
         .then((channel) => {
-            res.render(`channels/details`, { channel, game })
+            const user = req.user.id;
+            return User.findById(user)
+                .then((user) => {
+                    res.render(`channels/details`, { channel, game, user })
+                })
         })
         .catch((error) => {
             console.log(game)

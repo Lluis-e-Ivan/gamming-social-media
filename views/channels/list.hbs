@@ -25,9 +25,9 @@
                             <div class="col-4 game-results mb-4" data-genre="{{channel.game.title}}">
                                 <div class="my-3">
                                     <div class="mb-3">
-                                        <div>
-                                            <a href="/channels/{{id}}" class="object-fit-cover position-relative img__wrap" type="button">
-                                                <img id="preview" src="{{channel.image}}"  class="games-list-img object-fit-cover img__img" alt="...">
+                                        <div style="width:365px; height: 206px">
+                                            <a href="/channels/{{id}}" style="width:365px; height: 206px" class="object-fit-cover position-relative img__wrap" type="button">
+                                                <img id="preview" src="{{channel.image}}" style="width:365px; height: 206px" class="games-list-img object-fit-cover img__img" alt="...">
                                                 <div class="img__hover_layer">
                                                     <label class="input-group-text" for="inputGroupFile01" style="border: 0px;" type="button"><p class="img__description position-absolute top-50 start-50 translate-middle" ></p></label>
                                                     <input type="file" name="image" value="{{currentUser.image}}" class="form-control invisible" type="file" id="inputGroupFile01" accept="image/*">
@@ -64,9 +64,9 @@
                             <div class="col-4 game-results mb-4" data-genre="{{yourChannel.game.title}}">
                                 <div class="my-3">
                                     <div class="mb-3">
-                                        <div>
-                                            <a href="/channels/{{yourChannel.channel.id}}" class="object-fit-cover position-relative img__wrap" type="button">
-                                                <img id="preview" src="{{yourChannel.channel.image}}"  class="games-list-img object-fit-cover img__img" alt="...">
+                                        <div  style="width:365px; height: 206px">
+                                            <a href="/channels/{{yourChannel.channel.id}}"  style="width:365px; height: 206px" class="object-fit-cover position-relative img__wrap" type="button">
+                                                <img id="preview" src="{{yourChannel.channel.image}}" style="width:365px; height: 206px" class="games-list-img object-fit-cover img__img" alt="...">
                                                 <div class="img__hover_layer">
                                                     <label class="input-group-text" for="inputGroupFile01" style="border: 0px;" type="button"><p class="img__description position-absolute top-50 start-50 translate-middle" ></p></label>
                                                     <input type="file" name="image" class="form-control invisible" type="file" id="inputGroupFile01" accept="image/*">
@@ -90,3 +90,5 @@
         </div>
     </div>
 </div>
+
+{{>footer}}
