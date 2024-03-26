@@ -166,7 +166,15 @@ module.exports.profile = (req, res, next) => {
 }
 
 
-module.exports.edit = (req, res, next) => res.render('users/edit');
+module.exports.edit = (req, res, next) => {
+    const user = req.user.id;
+    User.findById(user)
+        .then((user) => {
+             res.render('users/edit', {user});
+        })
+        .catch(next)
+   
+}
 
 module.exports.doEdit = (req, res, next) => {
     const { id } = req.params;
